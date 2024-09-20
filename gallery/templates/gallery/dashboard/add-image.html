@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if 'add-image' in request.path %}
+Add Image
+{% else %}
+Update Image
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        {% comment %} {% if request.method == "GET" %} {% endcomment %}
+        <p class="h2 bg-success text-white text-center py-2 rounded">
+            {% if 'add-image' in request.path %}
+                Add New Image
+            {% else %}
+                Update Image
+            {% endif %}
+        </p>
+
+        <form class="mt-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="col">
+                <button class="btn btn-primary mt-0">Save</button>
+                <a href="{% url 'gallary:dasboard-gallery' %}" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

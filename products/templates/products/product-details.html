@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Details of Product
+{% endblock title %}
+
+{% block content %}
+    
+    {% include "components/_go_back.html" %}
+
+    <div class="container">
+        <div class="row mt-3 mb-5 justify-content-between">
+            {% comment %} left {% endcomment %}
+            <div class="card col-md-8">
+                <div class="row g-0">
+                  <div class="row m-auto rounded-3">
+                    <img src="https://www.kinghawkmed.com/uploads/201816430/automated-hematology-analyzer40425782428.jpg" class="img-fluid" alt="Machine photo">
+                  </div>
+                  <div class="col-auto">
+                    <div class="card-body">
+                      <h5 class="card-title">Machine name</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quisquam quidem earum ipsam voluptas dolore quos corrupti sequi rem unde, sit ratione deleniti minima officia voluptates nihil iste reprehenderit repudiandae sunt dolores animi. Maiores autem cumque ex non cupiditate quisquam, perferendis blanditiis optio atque? Voluptas illum odit libero deserunt nobis.</p>
+                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% comment %} right {% endcomment %}
+              <div class="col-md-3 border px-0 rounded-3" style="height: max-content;">
+                <p class="h6 bg-success text-white p-3 text-center">Some other Products</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
+                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Image gallery
+{% endblock title %}
+
+{% block content %}
+    <!-- Gallery -->
+    <div class="container my-5">
+      <h2 class="display-6 fw-normal text-center mb-4 text-success">Image Gallery</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <!-- Gallery Items/item -->
+         {% if images %}
+          {% for item in images %}
+            <div class="col gallery-item">
+              <div class="card">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="Gallery Image {{item.id}}">
+              </div>
+            </div>
+          {% endfor %}
+         {% else %}
+          <p class="h3 text-danger">No Images!</p>
+         {% endif %}
+        
+      </div>
+    </div>
+    <!-- Gallery -->
+{% endblock content %}

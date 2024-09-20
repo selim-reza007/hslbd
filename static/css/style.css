@@ -1,0 +1,174 @@
+a {
+    text-decoration: none;
+}
+
+.navbar-bg {
+    /* background: rgb(219, 235, 219); */
+    background: #f8f9fa;
+}
+
+.hero {
+    position: relative;
+    background-image: url('https://2017-2021.state.gov/wp-content/uploads/2019/04/shutterstock_683522173-2560x852.jpg');
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: #383837;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero .h2 {
+    font-size: 4rem;
+}
+
+.hero p {
+    font-size: 1.9rem;
+}
+
+.btn-primary {
+    margin-top: 20px;
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+/* .product-brand {
+    background: #c3faef;
+} */
+
+.products {
+    /* background: #c3faef; */
+}
+
+/* .about-bg {
+    background-color: #c3faef;
+} */
+
+.card-hover {
+    color: #000;
+}
+
+
+.product-hover {
+    transition: all 0.3s ease;
+}
+
+.product-hover:hover {
+    scale: 1.1;
+}
+
+.orange-span {
+    color: #ffa500;
+}
+
+.brand-card {
+    transition: all 0.3s ease;
+}
+
+.brand-card:hover {
+    scale: 1.05;
+}
+
+/* .about-us */
+
+.product-brand,
+.about-bg,
+.about-us,
+.contact-us-form {
+    background-color: #def7f2;
+    /* background-color: #c3faef; */
+}
+
+.gallery-item {
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    z-index: 1;
+    transform: scale(1.2);
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    color: #6c757d;
+}
+
+.footer a {
+    color: #6c757d;
+}
+
+.footer a:hover {
+    color: #343a40;
+    text-decoration: none;
+}
+
+.footer .social-icons a {
+    margin-right: 15px;
+    font-size: 24px;
+    color: #6c757d;
+}
+
+.footer .social-icons a:hover {
+    color: green;
+}
+
+.footer .footer-logo img {
+    max-width: 150px;
+}
+
+.footer-link {
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    margin-left: 5px;
+}
+
+/* Custom styling for the sidebar */
+.admin-body {
+
+    .container-fluid {
+
+        .d-flex {
+            height: 100vh;
+
+            .sidebar {
+                /* min-width: max-content; */
+                height: 100%;
+
+                .ul-list {
+                    .sidebar-link {
+                        margin: 50px 0;
+                        color: #a1a3a5;
+                        transition: all 0.3s ease;
+
+                        &.active {
+                            color: #fff
+                        }
+
+                        &:hover {
+                            margin-left: 5px;
+                            color: #fff
+                        }
+                    }
+                }
+            }
+
+            .content {
+                background-color: #fff;
+                height: 100%;
+            }
+        }
+    }
+}

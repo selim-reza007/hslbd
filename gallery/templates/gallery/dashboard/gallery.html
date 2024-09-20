@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Gallery{% endblock title %}
+
+{% block content %}
+    <!-- Gallery -->
+    <div class="my-0 pb-5">
+      <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Image Gallery</p>
+      <a href="{% url 'gallary:add-image' %}" class="btn btn-info mb-3">Add new Image</a>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        
+          {% if images %}
+            {% for image in images %}
+            <div class="col">
+              <div class="card">
+                <img src="{{ image.image.url }}" class="card-img-top" alt="Gallery Image 1">
+                <div class="btn-group mt-1">
+                  <a href="{% url 'gallary:edit-image' slug=image.id %}" class="btn btn-warning col-6">Change</a>
+                  <form class="col-6" action="{% url 'gallary:delete-image' slug=image.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger w-100" id="delete-img" onclick="return deleteFun()">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>  
+            {% endfor %}
+          {% else %}
+          <p class="h3 text-danger">No images</p>
+          {% endif %}
+          
+ 
+        </div>
+      </div>
+      <!-- Gallery -->
+{% endblock content %}

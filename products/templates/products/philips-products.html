@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+List of Philips's products
+{% endblock title %}
+
+{% block content %}
+
+    {% include "components/_go_back.html" %}
+    {% include "components/_product_list.html" with title="Philips' Products List" %}
+
+   
+{% endblock content %}

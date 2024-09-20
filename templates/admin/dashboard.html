@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="">
+  <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Dashboard</p>
+
+  <!-- Example Dashboard Stats -->
+  <div class="row">
+  
+    <div class="col-auto mb-3">
+      <div class="card text-white bg-primary">
+        <a href="" class="card-body position-relative text-white">
+          New Messages
+          <span class="card-text badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">200</span>
+        </a>
+      </div>
+    </div>
+  
+  </div>
+  
+  <!-- Example Data Table -->
+  <div class="table-responsive mt-4">
+    <h4>List of Products</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1234</td>
+          <td>John Doe</td>
+          <td>2024-09-15</td>
+          <td><span class="badge bg-success">In Stock</span></td>
+          <td class="">
+            <button class="btn btn-sm btn-success">View</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#1235</td>
+          <td>Jane Smith</td>
+          <td>2024-09-15</td>
+          <td><span class="badge bg-warning">Out of Stock</span></td>
+          <td>
+            <button class="btn btn-sm btn-success">View</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

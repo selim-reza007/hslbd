@@ -1,0 +1,38 @@
+
+
+
+{% comment %} category by Brands {% endcomment %}
+<section class="product-brand my-0 p-5 rounded-3">
+    <div class="container">
+      <div class="row">
+        <h2 class="display-6 fw-normal text-success brands text-center">Available Brands</h2>
+    </div>
+    <div class="row px-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4 align-items-center justify-content-center">
+          
+          <div class="col brand-card">
+            <div class="card text-center">
+              <a href="{% url 'products:ao-smith' %}">
+                <img src="{{ MEDIA_URL }}AO-Smith-Logo.jpg" class="w-50 m-auto" alt="AO Smith logo">
+                <div class="card-body">
+                  <h5 class="card-title">AO Smith</h5>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          <div class="col brand-card">
+            <div class="card text-center">
+              <a href="{% url 'products:philips' %}">
+                <img src="{{ MEDIA_URL }}philips.jpg" class="m-auto w-50" alt="Philips logo">
+                <div class="card-body">
+                  <h5 class="card-title">Philips</h5>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    </div>
+</section>

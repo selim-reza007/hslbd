@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+List of AO smith's products
+{% endblock title %}
+
+{% block content %}
+
+    {% include "components/_go_back.html" %}
+
+    {% include "components/_product_list.html" with title="AO Smith's Products List" %}
+    
+{% endblock content %}

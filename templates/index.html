@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Healthcare Solutions Limited
+{% endblock title %}
+
+{% block content %}
+    {% comment %} hero {% endcomment %}
+    <section class="hero my-0">
+        <div class="hero-content">
+            <p class="h2">Welcome to</p>
+            <p class="h2 text-success">Healthcare Solution Ltd.</p>
+            <p class="">Explore our products</p>
+            <a href="#services" class="btn btn-primary fw-normal">Learn More</a>
+        </div>
+    </section>
+
+    {% include "components/_brands_category.html" %}
+    
+    {% comment %} some products {% endcomment %}
+    <section class="products my-0 py-5 rounded">
+      <div class="container">
+        <div class="row">
+          <h2 class="text-center fw-normal display-6 text-success">Some of Our Products</h2>  
+        </div>
+        <div class="row d-flex gap-3 justify-content-md-between justify-content-center px-5 my-4">
+          
+          <div class="col-auto">
+            <div class="card py-3 shadow rounded-3 product-hover" style="width: 18rem;">
+                <a href="{% url 'products:details' %}">
+                    <img src="https://hslbd.com/images/product/AO-Smith-AR75-AS-H1-Water-Purifier-60646994652f1.jpg" class="card-img-top mb-3" alt="Product image">
+                    <div class="card-body border-top card-hover">
+                        <h5 class="card-title">Sample Name</h5>
+                        <p class="card-text lead">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </a>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="card py-3 shadow rounded-3 product-hover" style="width: 18rem;">
+              <a href="{% url 'products:details' %}">
+                  <img src="https://hslbd.com/images/product/AO-Smith-AR75-AS-H1-Water-Purifier-60646994652f1.jpg" class="card-img-top mb-3" alt="Product image">
+                  <div class="card-body border-top card-hover">
+                      <h5 class="card-title">Sample Name</h5>
+                      <p class="card-text lead">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="card py-3 shadow rounded-3 product-hover" style="width: 18rem;">
+              <a href="{% url 'products:details' %}">
+                <img src="https://hslbd.com/images/product/AO-Smith-AR75-AS-H1-Water-Purifier-60646994652f1.jpg" class="card-img-top mb-3" alt="Product image">
+                <div class="card-body border-top card-hover">
+                    <h5 class="card-title">Sample Name</h5>
+                    <p class="card-text lead">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row justify-content-center">
+          <div class="col text-center">
+            <a href="{% url 'products:all-products' %}" class="btn btn-outline-primary">Show More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}

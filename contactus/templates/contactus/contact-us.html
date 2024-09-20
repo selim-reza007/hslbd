@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Contact Us
+{% endblock title %}
+
+{% block content %}
+
+<section class="contact-us-form rounded p-5">
+    <div class="container">
+        <div class="row">
+            <h2 class="display-6 mb-5 text-success text-center fw-normal">Please fill below fields to book a meeting</h2>
+        </div>
+
+        {% if messages %}
+            <ul class="alert mx-3 alert-danger list-unstyled alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </ul>
+        {% endif %}
+        
+        
+        <form id="contactForm" method="post" novalidate>
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input name="firstName" type="text" class="form-control" id="floatingInput1" placeholder="Provide your First name" value="{{ form.firstName.value|default_if_none:'' }}">
+                            <label for="floatingInput1">First Name</label>
+                            <div class="text-danger">
+                                {{ form.firstName.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input name="lastName" type="text" class="form-control" id="floatingInput2" placeholder="Provide your Last name" value="{{ form.lastName.value|default_if_none:'' }}">
+                            <label for="floatingInput2">Last Name</label>
+                            <div class="text-danger">
+                                {{ form.lastName.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input name="companyName" type="text" class="form-control" id="floatingInput3" placeholder="Provide your company name" value="{{ form.companyName.value|default_if_none:'' }}">
+                            <label for="floatingInput3">Company Name</label>
+                            <div class="text-danger">
+                                {{ form.companyName.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input name="mobile" type="text" class="form-control" id="floatingInput4" placeholder="Provide your mobile number" value="{{ form.mobile.value|default_if_none:'' }}" required>
+                            <label for="floatingInput4">Mobile number<span class="text-danger">*</span></label>
+                            <div class="text-danger">
+                                {{ form.mobile.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input name="email" type="email" class="form-control" id="floatingInput5" placeholder="Provide your email address" value="{{ form.email.value|default_if_none:'' }}" required>
+                            <label for="floatingInput5">Email Address<span class="text-danger">*</span></label>
+                            <div class="text-danger">
+                                {{ form.email.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <textarea name="messageText" style="min-height: 200px;" class="form-control py-5" placeholder="Leave your message here" id="floatingTextarea" value="{{ form.messageText.value|default_if_none:'' }}" required></textarea>
+                            <label for="floatingTextarea">Your message<span class="text-danger">*</span></label>
+                            <div class="text-danger">
+                                {{ form.messageText.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Your Message</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+{% comment %} contact-us section {% endcomment %}
+<section class="contact-us py-5 my-5 rounded">
+    <div class="container">
+        <div class="row px-4">
+            <div class="col-md-5">
+                <h4 class="text-success">Healthcare Solutions Limited</h4>
+                <p class="">1134, Khilbarirtek, Vatara, Gulshan-2, Dhaka-1212, Bangladesh</p>
+                <p class=""><i class="fa-solid fa-phone"></i> +8801933882222</p>
+                <p class=""><i class="fa-regular fa-envelope"></i> info@hslbd.com</p>
+            </div>
+            <div class="col-md-7">
+                <h4 class="text-success">Our corncern</h4>
+                <p class="lead">
+                    Nature of Business Import, Marketing, Sales and Services, Supply and Distribution of biomedical equipments, hospital machineries, Healthcare Products & Consumables, Laboratory instruments, Reagents and Chemical and Medical device and chemical for raw materials etc. Tender Participations, Organizing and implementing Turnkey Projects. 
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
