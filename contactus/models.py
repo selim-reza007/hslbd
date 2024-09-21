@@ -10,7 +10,7 @@ class Message(models.Model):
     messageText = models.TextField()
     status = models.BooleanField(default=False, blank=True)
     messageRead = models.BooleanField(default=False, blank=True)
-
+    receivedDate = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.email

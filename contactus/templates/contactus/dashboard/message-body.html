@@ -1,0 +1,25 @@
+{% extends "my_admin\base.html" %}
+
+{% block title %}
+    Details of Message
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Details info of Received Message</p>
+
+        <div class="card">
+            
+            <div class="card-body">
+                <p><strong>Name: </strong>{{ message.firstName }} {{ message.lastName }}</p>
+                <p><strong>Email: </strong>{{ message.email }}</p>
+                <p><strong>Organization: </strong>{{ message.companyName }}</p>
+                <p><strong>Mobile: </strong>{{ message.mobile }}</p>
+                <p><strong>Message: </strong>{{ message.messageText }}</p>
+                <p><strong>Received on: </strong>{{ message.receivedDate }}</p>
+            </div>
+        </div>
+        {% include "components\_go_back.html" %}
+        
+    </div>
+{% endblock content %}

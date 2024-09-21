@@ -1,0 +1,61 @@
+{% extends "my_admin\base.html" %}
+
+{% block title %}
+Requested Messages
+{% endblock title %}
+
+{% block content %}
+<div class="">
+    <p class="h2 bg-success text-white text-center py-2 rounded mb-3">List of Received Messages</p>
+
+  <!-- Example Data Table -->
+  <div class="table-responsive mt-4">
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sender</th>
+          <th>Email address</th>
+          <th>Received Date</th>
+          <th>Status</th>
+          <th>Action Taken</th>
+          <th>Open Message</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for message in messages %}
+        <tr class="{% if message.status == False %}bg-light{% endif %}">
+          <td>{{ message.firstName }} {{ message.lastName }}</td>
+          <td>{{ message.email }}</td>
+          <td>{{ message.receivedDate }}</td>
+          <td>
+            {% if message.status == False %}
+              <span class="badge bg-warning">Not Viewed</span>
+            {% else %}
+              <span class="badge bg-info">Viewed</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if message.messageRead == True %}
+              <span class="badge bg-success">Replied</span>
+            {% else %}
+            <span class="badge bg-danger">Not Replied</span>
+            {% endif %}
+          </td>
+          <td class="">
+            <form action="{% url 'contactus:details-msg' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="messageId" value={{ message.id }}>
+              <button class="btn btn-sm btn-success" title="Click to open message">Open</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+  <!-- Example Data Table end -->
+</div>
+{% endblock content %}
