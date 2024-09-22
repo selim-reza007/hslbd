@@ -25,19 +25,19 @@ Requested Messages
       <tbody>
 
         {% for message in messages %}
-        <tr class="{% if message.status == False %}bg-light{% endif %}">
+        <tr class="{% if message.messageRead == False %}bg-light{% endif %}">
           <td>{{ message.firstName }} {{ message.lastName }}</td>
           <td>{{ message.email }}</td>
           <td>{{ message.receivedDate }}</td>
           <td>
-            {% if message.status == False %}
+            {% if message.messageRead == False %}
               <span class="badge bg-warning">Not Viewed</span>
             {% else %}
-              <span class="badge bg-info">Viewed</span>
+              <span class="badge bg-info text-dark">Viewed</span>
             {% endif %}
           </td>
           <td>
-            {% if message.messageRead == True %}
+            {% if message.status == True %}
               <span class="badge bg-success">Replied</span>
             {% else %}
             <span class="badge bg-danger">Not Replied</span>
@@ -47,7 +47,7 @@ Requested Messages
             <form action="{% url 'contactus:details-msg' %}" method="post">
               {% csrf_token %}
               <input type="hidden" name="messageId" value={{ message.id }}>
-              <button class="btn btn-sm btn-success" title="Click to open message">Open</button>
+              <button class="btn btn-sm btn-success" title="Click to open message"><i class="fa-solid fa-unlock"></i> Open</button>
             </form>
           </td>
         </tr>

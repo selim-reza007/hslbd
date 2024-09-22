@@ -1,4 +1,4 @@
-// Delete gallery image
-function deleteFun() {
-    return confirm("Are you sure you want to delete this image?");
+// Delete item
+function deleteFun(item) {
+    return confirm(`Are you sure you want to delete this ${item}?`);
 }

@@ -11,15 +11,60 @@
         <div class="card">
             
             <div class="card-body">
-                <p><strong>Name: </strong>{{ message.firstName }} {{ message.lastName }}</p>
-                <p><strong>Email: </strong>{{ message.email }}</p>
-                <p><strong>Organization: </strong>{{ message.companyName }}</p>
-                <p><strong>Mobile: </strong>{{ message.mobile }}</p>
-                <p><strong>Message: </strong>{{ message.messageText }}</p>
-                <p><strong>Received on: </strong>{{ message.receivedDate }}</p>
+                <div class="row">
+                    <p><strong>Name: </strong>{{ message.firstName }} {{ message.lastName }}</p>
+                    <p><strong>Email: </strong>{{ message.email }}</p>
+                    <p><strong>Organization: </strong>{{ message.companyName }}</p>
+                    <p><strong>Mobile: </strong>{{ message.mobile }}</p>
+                    <p><strong>Message: </strong>{{ message.messageText }}</p>
+                    <p><strong>Received on: </strong>{{ message.receivedDate }}</p>
+                </div>
+                
+                <div class="row px-2">
+                    <form class="border px-4 py-3 col-auto w-auto shadow-sm" action="{% url 'contactus:update-status' %}" method="post">
+                        {% csrf_token %}
+                        <div class="">
+                            <p class="h6">Message Status:
+                                {% if message.status == True %}
+                                    <span class="text-success fw-bold"> Replied</span>
+                                {% else %}
+                                    <span class="text-danger fw-bold">Not Replied</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="{% if message.status == True %}d-none{% endif %}">
+                            <div class="form-check mb-2">
+                                <input type="hidden" name="msgId" value="{{ message.id }}">
+                                <input id="statusCheckBox" class="form-check-input" type="checkbox" value="">
+                                <label class="form-check-label" for="statusCheckBox">
+                                  Mark as replied
+                                </label>
+                            </div>
+                            <button id="updateBtn" class="btn btn-sm btn-success" disabled><i class="fa-solid fa-floppy-disk"></i> Update</button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
+            
         </div>
-        {% include "components\_go_back.html" %}
+        
+        <div class="container">
+            <a href="{% url 'contactus:requested-msg' %}" class='btn btn-warning my-3'><i class="fa-solid fa-caret-left"></i> Previous Page</a>
+            <form class="d-inline-block" action="{% url 'contactus:delete-msg' slug=message.id %}" method="post">
+                {% csrf_token %}
+                <button onclick="return deleteFun('message')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+            </form>
+        </div>
         
     </div>
+
+    <script>
+        statusCheckBox = document.getElementById('statusCheckBox')
+        updateBtn = document.getElementById('updateBtn')
+
+        statusCheckBox.addEventListener('change', function() {
+            updateBtn.disabled = !statusCheckBox.checked;
+        });
+    </script>
 {% endblock content %}
