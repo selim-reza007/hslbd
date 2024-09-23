@@ -1,0 +1,16 @@
+
+
+
+
+<div class="col-auto">
+    <div class="card py-3 shadow rounded-3 product-hover" style="width: 18rem;">
+        <a href="{% url 'products:details' %}">
+            <img src="{{ product.productImage.url }}" class="card-img-top mb-3" alt="Product image">
+            <div class="card-body border-top card-hover">
+                <h5 class="card-title">{{ product.productName }}</h5>
+                <p class="card-text lead">{{ product.Brands.brandName }}</p>
+                <p class="card-text lead">{{ product.brand.country }}</p>
+            </div>
+        </a>
+    </div>
+</div>

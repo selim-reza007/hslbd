@@ -8,5 +8,6 @@ urlpatterns = [
     path('brand/ao-smith/', views.aoSmithProductsView, name="ao-smith"),
     path('brand/philips/', views.philipsProductsView, name="philips"),
     path('details/', views.productDetailView, name="details"),
+    path('dashboard/list/', views.productDashboardView, name='list-product'),
     path('dashboard/add/', views.addNewProductView, name='add-product'),
 ]
