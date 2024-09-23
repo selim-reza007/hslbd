@@ -12,9 +12,9 @@
             
             <div class="card-body">
                 <div class="row">
-                    <p><strong>Name: </strong>{{ message.firstName }} {{ message.lastName }}</p>
+                    <p><strong>Name: </strong> {% if message.firstName %}{{ message.firstName }} {% else %}Not provided{% endif %} {{ message.lastName }}</p>
                     <p><strong>Email: </strong>{{ message.email }}</p>
-                    <p><strong>Organization: </strong>{{ message.companyName }}</p>
+                    <p><strong>Organization: </strong> {% if message.companyName %}{{ message.companyName }} {% else %}Not provided{% endif %}</p>
                     <p><strong>Mobile: </strong>{{ message.mobile }}</p>
                     <p><strong>Message: </strong>{{ message.messageText }}</p>
                     <p><strong>Received on: </strong>{{ message.receivedDate }}</p>

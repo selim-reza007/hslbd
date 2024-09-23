@@ -28,6 +28,7 @@ urlpatterns = [
     path('gallery/', include('gallery.urls')),
     path('aboutus/', include('aboutus.urls')),
     path('contactus/', include('contactus.urls')),
+    path('brand/', include('brand.urls')),
 ]
 
 

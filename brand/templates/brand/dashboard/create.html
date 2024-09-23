@@ -1,0 +1,24 @@
+{% extends "my_admin/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Add new Brand
+{% endblock title %}
+
+{% block content %}
+    
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded">Add new Brand</p>
+        <div class="row">
+            <form class="col-md-6" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="">
+                    <button class="btn btn-primary px-3 mt-0">Save</button>
+                    <a class="btn btn-warning" href="{% url 'brand:brand-list' %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

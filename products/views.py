@@ -12,3 +12,7 @@ def philipsProductsView(request):
 
 def productDetailView(request):
     return render(request, 'products/product-details.html')
+
+#dashboard's views
+def addNewProductView(request):
+    return render(request, 'products/dashboard/add-product.html')

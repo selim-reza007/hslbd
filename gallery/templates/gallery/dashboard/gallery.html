@@ -15,10 +15,10 @@
               <div class="card">
                 <img src="{{ image.image.url }}" class="card-img-top" alt="Gallery Image 1">
                 <div class="btn-group mt-1">
-                  <a href="{% url 'gallary:edit-image' slug=image.id %}" class="btn btn-warning col-6">Change</a>
+                  <a href="{% url 'gallary:edit-image' slug=image.id %}" class="btn btn-warning col-6"><i class="fa-regular fa-pen-to-square"></i> Change</a>
                   <form class="col-6" action="{% url 'gallary:delete-image' slug=image.id %}" method="post">
                     {% csrf_token %}
-                    <button class="btn btn-danger w-100" id="delete-img" onclick="return deleteFun('image')">Delete</button>
+                    <button class="btn btn-danger w-100" id="delete-img" onclick="return deleteFun('image')"><i class="fa-solid fa-trash"></i> Delete</button>
                   </form>
                 </div>
               </div>

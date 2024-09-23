@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'gallery',
     'aboutus',
     'contactus',
+    'brand',
     'crispy_forms',
     'crispy_bootstrap5',
 ]

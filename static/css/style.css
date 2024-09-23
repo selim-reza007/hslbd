@@ -172,3 +172,13 @@ a {
         }
     }
 }
+
+.pagination-items,
+.pagination-item {
+    background-color: #198754;
+    transition: all 0.3s ease;
+}
+
+.pagination-items:hover {
+    background-color: #014d29;
+}

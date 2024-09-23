@@ -1,0 +1,44 @@
+{% extends "my_admin/base.html" %}
+
+{% block title %}
+All Brands list
+{% endblock title %}
+
+{% block content %}
+    
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded">List of available brands</p>
+        <a href="{% url 'brand:brand-add' %}" class="btn btn-info">Add new Brand</a>
+        {% if brands %}
+        <table class="table table-responsive table-striped mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Brnad Name</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for brand in brands %}
+                <tr>
+                    <th scope="col">{{ forloop.counter }}</th>
+                    <td>{{ brand.brandName }}</td>
+                    <td>{{ brand.country }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{% url 'brand:brand-edit' slug=brand.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <form class="d-inline-block" action="{% url 'brand:brand-delete' slug=brand.id %}" method="post">
+                            {% csrf_token %}
+                            <button onclick="return deleteFun('Brand')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="display-3 text-danger">No data!</p>
+        {% endif %}
+    </div>
+
+{% endblock content %}

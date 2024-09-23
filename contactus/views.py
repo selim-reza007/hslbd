@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .forms import MessageRequest
 from .models import Message
+from django.core.paginator import Paginator
 
 # Create your views here.
 def contactUsView(request):
@@ -18,19 +19,20 @@ def contactUsView(request):
         form = MessageRequest()
         return render(request, 'contactus/contact-us.html', { 'form' : form })
 
-#Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore libero rem ab maxime, quos quis, fugiat quidem temporibus provident non laboriosam amet ex repellendus cumque soluta tenetur veniam nostrum nulla alias a ducimus ut qui nihil repellat. Minima facere non recusandae, eius, laudantium corrupti iure molestias, quo esse ad quaerat?
-
 def requestedMsgView(request):
     data = Message.objects.all().order_by('-id')
-    return render(request, 'contactus/dashboard/messages-list.html', { 'messages' : data })
+    myPaginator = Paginator(data, 9)
+    page_number = request.GET.get('page')
+    page_obj = myPaginator.get_page(page_number)
 
-def messageDetailsView(request):
-    if request.method == "POST":
-        if 'messageId' in request.POST:
-            datum = Message.objects.get(id=request.POST.get('messageId'))
-            datum.messageRead = True
-            datum.save()
-            return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
+    # return render(request, 'contactus/dashboard/messages-list.html', { 'messages' : data })
+    return render(request, 'contactus/dashboard/messages-list.html', { 'messages' : page_obj })
+
+def messageDetailsView(request, slug):
+    datum = Message.objects.get(id=slug)
+    datum.messageRead = True
+    datum.save()
+    return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
 
 def updateMsgStatus(request):
     if request.method == "POST":

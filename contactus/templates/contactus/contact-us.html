@@ -84,7 +84,7 @@ Contact Us
                 <div class="row">
                     <div class="col">
                         <div class="form-floating">
-                            <textarea name="messageText" style="min-height: 200px;" class="form-control py-5" placeholder="Leave your message here" id="floatingTextarea" value="{{ form.messageText.value|default_if_none:'' }}" required></textarea>
+                            <textarea name="messageText" style="min-height: 200px;" class="form-control py-5" placeholder="Leave your message here" id="floatingTextarea" required>{{ form.messageText.value|default_if_none:'' }}</textarea>
                             <label for="floatingTextarea">Your message<span class="text-danger">*</span></label>
                             <div class="text-danger">
                                 {{ form.messageText.errors }}
