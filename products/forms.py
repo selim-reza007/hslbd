@@ -1,6 +1,7 @@
 from django import forms
 from .models import Products
 
+
 class CreateProduct(forms.ModelForm):
     class Meta:
         model = Products
@@ -26,3 +27,4 @@ class CreateProduct(forms.ModelForm):
             'description' : 'Description',
             'productImage' : 'Product Image'
         }
+    productImage = forms.ImageField(label='Product Image', required=False, widget=forms.FileInput)

@@ -1,0 +1,68 @@
+{% extends "my_admin\base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Product Details
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Product Details page</p>
+
+        <div class="container">
+          <a href="{% url 'products:list-product' %}" class='btn btn-warning my-3'><i class="fa-solid fa-caret-left"></i> Go Back</a>
+        </div>
+
+    
+        <div class="row mt-3 mb-5 px-2 justify-content-between">
+            <div class="card w-100 py-5 col-md-8">
+                
+                <div class="row g-0">
+                  <div class="m-auto rounded-3">
+                    <img src="{{ product.productImage.url }}" class="img-fluid" alt="Machine photo">
+                  </div>
+                  <div class="col-auto">
+                    <div class="card-body">
+                      
+                        <h5 class="card-title my-0">{{ product.productName }}</h5>
+                      <div class="card-text">
+                        <p class="my-0">Brand : <span class="text-success fw-bold">{{ product.barndName.brandName }}</span></p>
+                        <p>Country : <span class="text-success fw-bold">{{ product.barndName.country }}</span></p>
+                        <p>{{ product.description }}</p>
+                        <p>{{ product.info1 }}</p>
+                        <p>{{ product.info2 }}</p>
+                        <p>{{ product.info3 }}</p>
+                        <p>{{ product.info4 }}</p>
+                        <p>{{ product.info5 }}</p>
+                        <p>{{ product.info6 }}</p>
+                        <p>{{ product.info7 }}</p>
+                        <p>{{ product.info8 }}</p>
+                        <p>{{ product.info9 }}</p>
+                        <p>{{ product.info10 }}</p>
+                        <p>{{ product.info11 }}</p>
+                        <p>{{ product.info12 }}</p>
+                        <p>{{ product.info13 }}</p>
+                        <p>{{ product.info14 }}</p>
+                        <p>{{ product.info15 }}</p>
+                      </div>
+                      <!--Action section of product-->
+                      <div class="">
+                        
+                        <a class="btn btn-warning px-3" href="{% url 'products:edit' slug=product.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        
+                        <form class="d-inline-block" action="{% url 'products:delete' slug=product.id %}" method="post">
+                          {% csrf_token %}
+                          <button onclick="return deleteFun('Product')" class="btn btn-danger px-3"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </form>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

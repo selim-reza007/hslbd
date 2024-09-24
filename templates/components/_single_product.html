@@ -1,15 +1,18 @@
 
 
 
-
-<div class="col-auto">
+<div class="col-auto mb-5">
     <div class="card py-3 shadow rounded-3 product-hover" style="width: 18rem;">
-        <a href="{% url 'products:details' %}">
+        {% if 'dashboard' in request.path %}
+            <a href="{% url 'products:dashboard-details' slug=product.id %}" title="Click to open product details">
+        {% else %}
+            <a href="{% url 'products:details' slug=product.id %}" title="Click to open product details">
+        {% endif %}
             <img src="{{ product.productImage.url }}" class="card-img-top mb-3" alt="Product image">
             <div class="card-body border-top card-hover">
                 <h5 class="card-title">{{ product.productName }}</h5>
-                <p class="card-text lead">{{ product.Brands.brandName }}</p>
-                <p class="card-text lead">{{ product.brand.country }}</p>
+                <p class="card-text lead mb-0">Brand: {{ product.barndName.brandName }}</p>
+                <p class="card-text lead mt-0">Country: {{ product.barndName.country }}</p>
             </div>
         </a>
     </div>

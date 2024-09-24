@@ -9,6 +9,15 @@
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">All Products</p>
         <a href="{% url 'products:add-product' %}" class="btn btn-info mb-3">Add new Product</a>
         
+        {% if messages %}
+        <ul class="alert mx-3 alert-danger list-unstyled alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </ul>
+        {% endif %}
+
         <div class="mt-0 row gap-3">
             {% for data in products %}
                 {% include "components/_single_product.html" with product=data %}
