@@ -137,7 +137,6 @@ a {
 
 /* Custom styling for the sidebar */
 .admin-body {
-
     .container-fluid {
 
         .d-flex {
@@ -166,8 +165,8 @@ a {
             }
 
             .content {
-                background-color: #fff;
                 height: 100%;
+                background-color: #fff;
             }
         }
     }

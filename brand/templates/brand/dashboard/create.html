@@ -8,14 +8,19 @@ Add new Brand
 {% block content %}
     
     <div class="">
-        <p class="h2 bg-success text-white text-center py-2 rounded">Add new Brand</p>
+        <p class="h2 bg-success text-white text-center py-2 rounded">
+            {% if 'brand/dashboard/edit/' in request.path %}
+            Update Brand
+            {% else %}
+            Add new Brand</p>
+            {% endif %}
         <div class="row">
             <form class="col-md-6" method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="">
-                    <button class="btn btn-primary px-3 mt-0">Save</button>
-                    <a class="btn btn-warning" href="{% url 'brand:brand-list' %}">Cancel</a>
+                    <button class="btn btn-primary px-3 mt-0"><i class="fa-solid fa-floppy-disk"></i> {% if 'brand/dashboard/edit/' in request.path %}Update{% else %}Save{% endif %}</button>
+                    <a class="btn btn-warning" href="{% url 'brand:brand-list' %}"><i class="fa-solid fa-ban"></i> Cancel</a>
                 </div>
             </form>
         </div>

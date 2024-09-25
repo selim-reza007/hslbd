@@ -13,11 +13,11 @@
 </head>
 <body class="admin-body">
 
-  <div class="container-fluid px-0">
+  <div class="container-fluid px-0 position-relative">
     <div class="d-flex bg-light">
       <!-- Sidebar -->
       <div class="sidebar col-4 col-md-3 col-xl-2 bg-dark px-4 pt-3 position-fixed top-0 start-0">
-        <p class="h4 text-light">Admin Pannel</p>
+        <p class="h4 text-light text-wrap">Admin Pannel</p>
         <hr class="text-light px-1">
         <ul class="ul-list text-white list-unstyled">
           <li class="my-2"><a class="sidebar-link {% if request.path == "/dashboard/" %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a></li>

@@ -8,7 +8,7 @@
 {% block content %}
     <div class="">
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">
-            {% if request.path == 'dashboard/add/' %}
+            {% if request.path == '/products/dashboard/add/' %}
             Add new Product
             {% else %}
             Edit Product
@@ -21,13 +21,13 @@
                 {{ form|crispy }}
                 <div class="col">
                     <button class="btn btn-primary mt-0"><i class="fa-solid fa-floppy-disk"></i> 
-                        {% if request.path == 'dashboard/add/' %}
+                        {% if request.path == '/products/dashboard/add/' %}
                             Save
                         {% else %}
                             Update
                         {% endif %}
                     </button>
-                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger"><i class="fa-solid fa-ban"></i> Cancel</a>
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-warning"><i class="fa-solid fa-ban"></i> Cancel</a>
                 </div>
             </form>
         </div>

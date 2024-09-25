@@ -10,7 +10,8 @@ All Brands list
         <p class="h2 bg-success text-white text-center py-2 rounded">List of available brands</p>
         <a href="{% url 'brand:brand-add' %}" class="btn btn-info">Add new Brand</a>
         {% if brands %}
-        <table class="table table-responsive table-striped mt-4">
+        <div class="table-responsive mt-4">
+            <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -35,7 +36,8 @@ All Brands list
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
+            </table>
+        </div>
         {% else %}
             <p class="display-3 text-danger">No data!</p>
         {% endif %}

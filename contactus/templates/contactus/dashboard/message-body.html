@@ -44,17 +44,17 @@
                         </div>
                     </form>
                 </div>
-                
+                <form class="mt-3" action="{% url 'contactus:delete-msg' slug=message.id %}" method="post">
+                    {% csrf_token %}
+                    <button onclick="return deleteFun('message')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                </form>
             </div>
             
         </div>
         
         <div class="container">
             <a href="{% url 'contactus:requested-msg' %}" class='btn btn-warning my-3'><i class="fa-solid fa-caret-left"></i> Previous Page</a>
-            <form class="d-inline-block" action="{% url 'contactus:delete-msg' slug=message.id %}" method="post">
-                {% csrf_token %}
-                <button onclick="return deleteFun('message')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
-            </form>
+            
         </div>
         
     </div>

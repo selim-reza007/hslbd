@@ -6,15 +6,20 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, DatabaseError
 
 # Create your views here.
+# Display data to normal view
 def productsListView(request):
+    # hrer dynamic data will be fatched
     return render(request, 'products/list.html')
 
+#depreciated view. This view will be deleted
 def aoSmithProductsView(request):
     return render(request, 'products/ao-smith-products.html')
 
+#depreciated view. This view will be deleted
 def philipsProductsView(request):
     return render(request, 'products/philips-products.html')
 
+#detailed product view in normal view
 def productDetailView(request, slug):
     try:
         datum = Products.objects.get(id=slug)
@@ -27,7 +32,6 @@ def productDetailView(request, slug):
         return HttpResponse('Database error occured', status=500)
 
 #dashboard's views
-
 #Viewing product info from dashboard
 def productDetailDashboardView(request, slug):
     try:
