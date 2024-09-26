@@ -42,17 +42,6 @@ a {
     text-decoration: none;
 }
 
-/* .product-brand {
-    background: #c3faef;
-} */
-
-.products {
-    /* background: #c3faef; */
-}
-
-/* .about-bg {
-    background-color: #c3faef;
-} */
 
 .card-hover {
     color: #000;
@@ -79,14 +68,11 @@ a {
     scale: 1.05;
 }
 
-/* .about-us */
-
 .product-brand,
 .about-bg,
 .about-us,
 .contact-us-form {
     background-color: #def7f2;
-    /* background-color: #c3faef; */
 }
 
 .gallery-item {

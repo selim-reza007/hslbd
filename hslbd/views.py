@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from contactus.views import unreadMsgCount
+from products.models import Products
 
 def homeView(request):
-    return render(request, 'index.html')
+    data = Products.objects.all()[:3]
+    return render(request, 'index.html', { 'products' : data })
 
 def dashboardView(request):
     number = unreadMsgCount(request)

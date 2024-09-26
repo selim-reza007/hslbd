@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_list_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import CreateBrand
 from .models import Brands
 from django.db import IntegrityError, DatabaseError
@@ -30,7 +30,7 @@ def createBrandView(request):
 
 # update brand
 def editBrandView(request, slug):
-    obj = get_list_or_404(Brands ,id=slug)
+    obj = get_object_or_404(Brands ,id=slug)
     if request.method == "POST":
         form = CreateBrand(request.POST, instance=obj)
         try:
@@ -48,6 +48,6 @@ def editBrandView(request, slug):
 #delete brand item
 def deleteBrandView(request, slug):
     if request.method == "POST":
-        obj = get_list_or_404(id=slug)
+        obj = get_object_or_404(Brands ,id=slug)
         obj.delete()
         return redirect('brand:brand-list')

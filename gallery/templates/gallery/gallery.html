@@ -8,6 +8,7 @@ Image gallery
     <!-- Gallery -->
     <div class="container my-5">
       <h2 class="display-6 fw-normal text-center mb-4 text-success">Image Gallery</h2>
+
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
         <!-- Gallery Items/item -->
          {% if images %}
@@ -19,7 +20,7 @@ Image gallery
             </div>
           {% endfor %}
          {% else %}
-          <p class="h3 text-danger">No Images!</p>
+          <p class="h3 text-danger">No Images!</p> 
          {% endif %}
         
       </div>

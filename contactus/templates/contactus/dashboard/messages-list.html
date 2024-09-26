@@ -67,17 +67,17 @@ Requested Messages
     <div class="pagination w-auto">
       <span class="step-links">
         {% if messagesData.has_previous %}
-          <a class="text-white py-1 px-3 rounded pagination-items" href="?page=1">&laquo; First</a>
-          <a class="text-white py-1 px-3 rounded pagination-items" href="?page={{ messagesData.previous_page_number }}">Previous</a>
+          <a class="text-white py-1 px-3 rounded pagination-items d-inline-block" href="?page=1">&laquo; First</a>
+          <a class="text-white py-1 px-3 rounded pagination-items d-inline-block my-1 my-sm-0" href="?page={{ messagesData.previous_page_number }}">Previous</a>
         {% endif %}
   
-        <span class="current text-white py-1 px-3 rounded pagination-item me-1">
+        <p class="current text-white py-1 px-3 rounded d-inline-block pagination-item me-1 mb-0">
           Page {{ messagesData.number }} of {{ messagesData.paginator.num_pages }}
-        </span>
+        </p>
   
         {% if messagesData.has_next %}
-          <a class="text-white py-1 px-3 rounded pagination-items" href="?page={{ messagesData.next_page_number }}">Next</a>
-          <a class="text-white py-1 px-3 rounded pagination-items" href="?page={{ messagesData.paginator.num_pages }}">Last &raquo;</a>
+          <a class="text-white py-1 px-3 rounded pagination-items d-inline-block my-1 my-sm-0" href="?page={{ messagesData.next_page_number }}">Next</a>
+          <a class="text-white py-1 px-3 rounded pagination-items d-inline-block" href="?page={{ messagesData.paginator.num_pages }}">Last &raquo;</a>
         {% endif %} 
       </span>
      </div>

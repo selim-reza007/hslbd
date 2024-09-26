@@ -7,6 +7,16 @@
     <div class="my-0 pb-5">
       <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Image Gallery</p>
       <a href="{% url 'gallary:add-image' %}" class="btn btn-info mb-3">Add new Image</a>
+
+      {% if messages %}
+      <ul class="alert alert-success list-unstyled alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </ul>
+      {% endif %}
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
         
           {% if images %}

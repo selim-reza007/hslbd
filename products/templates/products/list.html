@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load brand_tags %}
 
 {% block title %}
 List of all products
@@ -6,8 +7,25 @@ List of all products
 
 {% block content %}
 
-    {% include "components/_brands_category.html" %}
+    {% show_brands %}
 
-    {% include "components/_product_list.html" with title="List of All Products" %}
+    {% comment %} some products {% endcomment %}
+    <section class="products mb-5 py-5 rounded">
+        <div class="container">
+            <div class="row mb-5">
+                <h3 class="text-center fw-bolder orange-span">{{ title }}</h3>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                {% comment %} Single product will render dynamically {% endcomment %}
+                {% if products %}
+                    {% for product in products %}
+                        {% include "components/_single_product.html" with product=product  %}
+                    {% endfor %}
+                {% else %}
+                    <p class="display-3 text-danger">No data!</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
     
 {% endblock content %}

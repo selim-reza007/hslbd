@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponse, get_list_or_404
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import AddImage
 from .models import Gallery
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, DatabaseError
+from django.contrib import messages
 
 # Create your views here
 #pulling data from database to display in normal view
@@ -60,7 +61,8 @@ def editImageView(request, slug):
 #delete image
 def deleteImageView(request, slug):
     if request.method == "POST":
-        item = get_list_or_404(Gallery ,id=slug)
+        item = get_object_or_404(Gallery ,id=slug)
         if item:
-            item.delete()
+            # item.delete()
+            messages.success(request,"The Image has been deleted successfully!")
             return redirect('gallary:dasboard-gallery')

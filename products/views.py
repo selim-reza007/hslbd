@@ -4,12 +4,30 @@ from .models import Products
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, DatabaseError
+from brand.models import Brands
 
 # Create your views here.
-# Display data to normal view
+# Display all products list to normal view
 def productsListView(request):
-    # hrer dynamic data will be fatched
-    return render(request, 'products/list.html')
+    try:
+        data = Products.objects.all()
+        return render(request, 'products/list.html', { 'products' : data, 'title' : 'List of All Products' })
+    except IntegrityError:
+        return HttpResponse("Integrity error occured")
+    except DatabaseError:
+        return HttpResponse("Database error occured")
+
+def productsListByBrandView(request, slug):
+    try:
+        data = Products.objects.filter(barndName=slug)
+        brandName = Brands.objects.get(id=slug).brandName
+        return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products' })
+    except IntegrityError:
+        return HttpResponse("Integrity error occured")
+    except DatabaseError:
+        return HttpResponse("Database error occured")
+    except ObjectDoesNotExist:
+        return HttpResponse("Object not found")
 
 #depreciated view. This view will be deleted
 def aoSmithProductsView(request):

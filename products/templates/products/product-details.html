@@ -13,8 +13,16 @@ Details of Product
             {% comment %} left {% endcomment %}
             <div class="card py-5 col-md-8">
                 <div class="row g-0">
-                  <div class="m-auto rounded-3">
-                    <img src="{{ product.productImage.url }}" class="img-fluid" alt="Machine photo">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="rounded-3 col-md-8 mb-4 mb-md-0">
+                        <img src="{{ product.productImage.url }}" class="img-fluid" alt="Machine photo">
+                      </div>
+                      <div class="col-md-4">
+                        <p class="bg-primary w-auto py-3 text-center fw-bold text-white rounded-3 "><i class="fa-solid fa-phone"></i>&nbsp;&nbsp; +8801933882222</p>
+                        <p class="bg-info w-auto py-3 text-center fw-bold text-dark rounded-3 "><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp; info@hslbd.com</p>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-auto">
                     <div class="card-body">
