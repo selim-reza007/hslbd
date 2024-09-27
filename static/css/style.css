@@ -99,14 +99,28 @@ a {
     text-decoration: none;
 }
 
+.footer .social-icons {
+    
+}
+
 .footer .social-icons a {
     margin-right: 15px;
     font-size: 24px;
+    width: 35px;
+    border-radius: 50%;
+    align-self: center;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 5px;
     color: #6c757d;
+    transition: all 0.3s ease;
 }
 
 .footer .social-icons a:hover {
-    color: green;
+    color: #fff;
+    background-color: #6d5c5c;
+    
 }
 
 .footer .footer-logo img {

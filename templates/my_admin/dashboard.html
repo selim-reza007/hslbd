@@ -3,9 +3,17 @@
 {% block title %}Dashboard{% endblock title %}
 
 {% block content %}
-<div class="">
+<div class="mb-5">
   <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Dashboard</p>
-
+  
+  {% if messages %}
+  <ul class="alert alert-success list-unstyled alert-dismissible fade show" role="alert">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </ul>
+  {% endif %}
   <!-- Example Dashboard Stats -->
   <div class="row">
   
@@ -21,43 +29,39 @@
     </div>
   
   </div>
+
+  {% if profileInfo %}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <p class="h3 text-center">Company Information:</p>
+          </div>
+          <div class="card-body">
+            
+            <div class="border-bottom">
+              <p class="lead mb-0">Mobile Number</p>
+              <p>{{ profileInfo.mobile }}</p>
+            </div>
+            <div class="border-bottom">
+              <p class="lead mb-0">Email</p>
+              <p>{{ profileInfo.email }}</p>
+            </div>
+            <div class="">
+              <p class="lead mb-0">Company CV</p>
+              <a href="{{ profileInfo.profile.url }}">Click here <i class="fa-solid fa-download"></i></a>
+            </div>
   
-  <!-- Example Data Table -->
-  <div class="table-responsive mt-4">
-    <h4>List of Products</h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Brand</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>#1234</td>
-          <td>John Doe</td>
-          <td>2024-09-15</td>
-          <td><span class="badge bg-success">In Stock</span></td>
-          <td class="">
-            <button class="btn btn-sm btn-success">View</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>#1235</td>
-          <td>Jane Smith</td>
-          <td>2024-09-15</td>
-          <td><span class="badge bg-warning">Out of Stock</span></td>
-          <td>
-            <button class="btn btn-sm btn-success">View</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'aboutus:edit-info' slug=profileInfo.id %}" class="d-inline-block btn btn-primary">Chick to change info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="display-3 text-danger">You haven't added company profile yet!</p>
+    <a href="{% url 'aboutus:add-info' %}" class="d-inline-block btn btn-primary">Add company Profile</a>
+  {% endif %}
 </div>
 {% endblock content %}
