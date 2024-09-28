@@ -4,9 +4,7 @@ from . import views
 app_name = 'products'
 
 urlpatterns = [
-    path('all/', views.productsListView, name="all-products"), #Deprecidated route
-    path('brand/ao-smith/', views.aoSmithProductsView, name="ao-smith"), #Deprecidated route
-    path('brand/philips/', views.philipsProductsView, name="philips"), #Deprecidated route
+    path('all/', views.productsListView, name="all-products"),#display all products in normal view
     path('dashboard/list/', views.productDashboardView, name='list-product'), #Listing all Products in Dashboard
     path('dashboard/add/', views.addNewProductView, name='add-product'), #adding product
     path('<slug:slug>/list/', views.productsListByBrandView, name='by-brand'),

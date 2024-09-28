@@ -29,19 +29,12 @@ def productsListByBrandView(request, slug):
     except ObjectDoesNotExist:
         return HttpResponse("Object not found")
 
-#depreciated view. This view will be deleted
-def aoSmithProductsView(request):
-    return render(request, 'products/ao-smith-products.html')
-
-#depreciated view. This view will be deleted
-def philipsProductsView(request):
-    return render(request, 'products/philips-products.html')
-
 #detailed product view in normal view
 def productDetailView(request, slug):
     try:
+        data = Products.objects.all()[:5] #getting 5 products data
         datum = Products.objects.get(id=slug)
-        return render(request, 'products/product-details.html', { 'product' : datum })
+        return render(request, 'products/product-details.html', { 'product' : datum, 'products' : data })
     except ObjectDoesNotExist:
         return HttpResponse('Item not found', status=404)
     except IntegrityError:

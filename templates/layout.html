@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}-hslbd</title>
-    <link rel="icon" href="https://hslbd.com/favicon.png" type="image/png">
+    <link rel="icon" href="{{ MEDIA_URL }}favicon.png" type="image/png">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fw-bolder navbar-bg">
             <div class="container">
-              <a class="navbar-brand" href="#"><img class="img-fluid w-25" src="https://hslbd.com/img/logo-hsl.png" alt="hslbd logo"></a>
+              <a class="navbar-brand" href="{% url 'home' %}"><img class="img-fluid w-25" src="{{ MEDIA_URL }}logo-hsl.png" alt="hslbd logo"></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -72,18 +72,18 @@
             <div class="row">
                 <!-- Footer Logo -->
                 <div class="col-md-3 footer-logo">
-                    <a href="#">
-                        <img src="https://hslbd.com/img/logo-hsl.png" alt="hslbd logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{{ MEDIA_URL }}logo-hsl.png">
                     </a>
                 </div>
                 <!-- Footer Navigation -->
                 <div class="col-md-3">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a class="footer-link" href="#">Home</a></li>
-                        <li><a class="footer-link" href="#">About</a></li>
-                        <li><a class="footer-link" href="#">Products</a></li>
-                        <li><a class="footer-link" href="#">Contact</a></li>
+                        <li><a class="footer-link" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="footer-link" href="{% url 'aboutus:aboutus' %}">About</a></li>
+                        <li><a class="footer-link" href="{% url 'products:all-products' %}">Products</a></li>
+                        <li><a class="footer-link" href="{% url 'contactus:contactus' %}">Contact</a></li>
                     </ul>
                 </div>
                 <!-- Contact Information -->

@@ -9,7 +9,7 @@ a {
 
 .hero {
     position: relative;
-    background-image: url('https://2017-2021.state.gov/wp-content/uploads/2019/04/shutterstock_683522173-2560x852.jpg');
+    background-image: url('../../media/hero-background.jpg');
     border-radius: 5px;
     background-size: cover;
     background-position: center;

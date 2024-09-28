@@ -64,15 +64,9 @@ Details of Product
               <div class="col-md-3 border px-0 rounded-3" style="height: max-content;">
                 <p class="h6 bg-success text-white p-3 text-center">Some other Products</p>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith AR600-U3 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith AR75-AS-H1 Water Purifier</a></li>
-                  <li class="list-group-item"><a href="">AO Smith S3+ Water Purifier</a></li>
+                  {% for product in products  %}
+                    <li class="list-group-item"><a href="{% url 'products:details' slug=product.id %}">{{ product.productName }}</a></li>
+                  {% endfor %}
                 </ul>
               </div>
         </div>
