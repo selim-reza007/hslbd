@@ -4,6 +4,15 @@
 {% block title %}Add Company Profile{% endblock title %}
 
 {% block content %}
+    {% if messages %}
+        <ul class="alert mx-3 alert-success list-unstyled alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </ul>
+    {% endif %}
+
     <p class="h2 bg-success text-white text-center py-2 rounded">Add Company Profile</p>
     <div class="row row-cols-1 row-cols-md-2">
         <div class="col">

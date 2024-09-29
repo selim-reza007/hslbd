@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import CreateCompanyProfile
-from django.db import IntegrityError, DatabaseError
+from django.db import IntegrityError, DatabaseError, transaction
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from .models import CompanyInfo
@@ -10,18 +10,20 @@ from .models import CompanyInfo
 def aboutUsView(request):
     return render(request, 'aboutus/aboutus.html')
 
+
 def createAboutUsView(request):
     if request.method == "POST":
         form = CreateCompanyProfile(request.POST, request.FILES)
         if form.is_valid():
             try:
-                form.save()
-                messages.success(request, "Company profile added.")
-                return redirect('dashboard')
+                with transaction.atomic():
+                    form.save()
+                    messages.success(request, "Company profile added.")
+                    return redirect('dashboard')
             except IntegrityError:
-                return HttpResponse("Integrity error occured.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occcured.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateCompanyProfile()
     return render(request, 'aboutus/dashboard/create.html', { 'form' : form})
@@ -32,13 +34,14 @@ def updateAboutUsView(request, slug):
         form = CreateCompanyProfile(request.POST, request.FILES, instance=obj)
         if form.is_valid():
             try:
-                form.save()
-                messages.success(request, "Company profile updated.")
-                return redirect('dashboard')
+                with transaction.atomic():
+                    form.save()
+                    messages.success(request, "Company profile updated.")
+                    return redirect('dashboard')
             except IntegrityError:
-                return HttpResponse("Integrity error occured.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occcured.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateCompanyProfile(instance=obj)
     return render(request, 'aboutus/dashboard/create.html', { 'form' : form})
