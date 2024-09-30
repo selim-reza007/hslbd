@@ -181,3 +181,19 @@ a {
 .pagination-items:hover {
     background-color: #014d29;
 }
+
+.login-body {
+    height: 100vh;
+    .login-form {
+        .form-container {
+            background: #adb8b3;
+            
+            .img-container {
+                background: #00729c;
+                top: -10%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}

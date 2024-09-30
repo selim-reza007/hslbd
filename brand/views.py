@@ -15,17 +15,18 @@ def brandsListView(request):
 
 # create new brand
 def createBrandView(request):
-    form = CreateBrand()
     if request.method == "POST":
         form = CreateBrand(request.POST)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 return redirect('brand:brand-list')
-        except IntegrityError:
-            return HttpResponse("Integrity error occured")
-        except DatabaseError:
-            return HttpResponse("Database error occured")
+            except IntegrityError:
+                return HttpResponse("Integrity error occured")
+            except DatabaseError:
+                return HttpResponse("Database error occured")
+    else:
+        form = CreateBrand()
     return render(request, 'brand/dashboard/create.html', { 'form' : form })
 
 # update brand

@@ -10,7 +10,6 @@ from .models import CompanyInfo
 def aboutUsView(request):
     return render(request, 'aboutus/aboutus.html')
 
-
 def createAboutUsView(request):
     if request.method == "POST":
         form = CreateCompanyProfile(request.POST, request.FILES)
