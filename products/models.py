@@ -21,7 +21,7 @@ class Products(models.Model):
     info14 = models.CharField(max_length=200, blank=True)
     info15 = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
-    productImage = models.ImageField(default='fallback.jpg', blank=True)
+    productImage = models.ImageField(default='fallback.jpg')
 
     def __str__(self):
         return self.productName

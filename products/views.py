@@ -79,6 +79,7 @@ def addNewProductView(request):
         try:
             if form.is_valid():
                 form.save()
+                messages.success(request, "New product information is added successfully")
                 return redirect('products:list-product')
         except ObjectDoesNotExist:
             return HttpResponse("Item not found", status=404)
@@ -99,6 +100,7 @@ def editProductView(request, slug):
         try:
             if form.is_valid():
                 form.save()
+                messages.success(request, f"{obj.productName}'s data is updated!")
                 return redirect('products:list-product')
         except ObjectDoesNotExist:
             return HttpResponse("Item not found", status=404)

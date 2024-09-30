@@ -29,17 +29,17 @@ class CreateProduct(forms.ModelForm):
             'description' : 'Description',
             'productImage' : 'Product Image'
         }
-    productImage = forms.ImageField(label='Product Image', required=False, widget=forms.FileInput)
 
     def clean_productImage(self):
         file = self.cleaned_data.get('productImage')
-
+        if not file and self.instance.pk:
+            return self.instance.productImage
         if file:
             if file.size > max_size:
                 raise forms.ValidationError("File size should be less than 1MB")
-            
-            extension = file.name.split('.')[-1].lower()
-            if extension not in allowed_extension:
-                raise forms.ValidationError("Not allowed file format. Allowed formats are jpeg, jpg, png")
         
+        extension = file.name.split('.')[-1].lower()
+        if extension not in allowed_extension:
+            raise forms.ValidationError("Not allowed file format. Allowed formats are jpeg, jpg, png")
+
         return file
