@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import IntegrityError, DatabaseError
-from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 def loginView(request):
@@ -29,4 +28,3 @@ def logoutView(request):
             return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
         except DatabaseError:
             return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
-            

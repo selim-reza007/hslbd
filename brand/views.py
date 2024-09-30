@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import CreateBrand
 from .models import Brands
 from django.db import IntegrityError, DatabaseError
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+#listing all brand info to dashboard view
+@login_required(login_url='/admin/')
 def brandsListView(request):
     try:
         data = Brands.objects.all()
@@ -14,6 +17,7 @@ def brandsListView(request):
     return render(request, 'brand/dashboard/list.html', { 'brands' : data })
 
 # create new brand
+@login_required(login_url='/admin/')
 def createBrandView(request):
     if request.method == "POST":
         form = CreateBrand(request.POST)
@@ -30,6 +34,7 @@ def createBrandView(request):
     return render(request, 'brand/dashboard/create.html', { 'form' : form })
 
 # update brand
+@login_required(login_url='/admin/')
 def editBrandView(request, slug):
     obj = get_object_or_404(Brands ,id=slug)
     if request.method == "POST":
@@ -47,6 +52,7 @@ def editBrandView(request, slug):
         return render(request,'brand/dashboard/create.html', { 'form' : form })
 
 #delete brand item
+@login_required(login_url='/admin/')
 def deleteBrandView(request, slug):
     if request.method == "POST":
         obj = get_object_or_404(Brands ,id=slug)

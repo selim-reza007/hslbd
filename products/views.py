@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, DatabaseError
 from brand.models import Brands
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Display all products list to normal view
@@ -17,6 +18,7 @@ def productsListView(request):
     except DatabaseError:
         return HttpResponse("Database error occured")
 
+#display products list by brand in normal view
 def productsListByBrandView(request, slug):
     try:
         data = Products.objects.filter(barndName=slug)
@@ -44,6 +46,7 @@ def productDetailView(request, slug):
 
 #dashboard's views
 #Viewing product info from dashboard
+@login_required(login_url='/admin/')
 def productDetailDashboardView(request, slug):
     try:
         datum = Products.objects.get(id=slug)
@@ -56,6 +59,7 @@ def productDetailDashboardView(request, slug):
         return HttpResponse('Database error occured', status=500)
 
 #Viewing products list from dashboard
+@login_required(login_url='/admin/')
 def productDashboardView(request):
     try:
         data = Products.objects.all()
@@ -67,7 +71,8 @@ def productDashboardView(request):
     except DatabaseError:
         return HttpResponse("Database error occurred", status=500)
 
-#Creating new product
+#Creating new product in Dashboard
+@login_required(login_url='/admin/')
 def addNewProductView(request):
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES)
@@ -86,6 +91,7 @@ def addNewProductView(request):
         return render(request, 'products/dashboard/add-product.html', { 'form' : form })
 
 #edting exissting product
+@login_required(login_url='/admin/')
 def editProductView(request, slug):
     obj = Products.objects.get(id=slug)
     form = CreateProduct(instance=obj)
@@ -105,6 +111,7 @@ def editProductView(request, slug):
         return render(request, 'products/dashboard/add-product.html', { 'form' : form })
     
 #delete product
+@login_required(login_url='/admin/')
 def deleteProductView(request, slug):
     if request.method == "POST":
         try:
