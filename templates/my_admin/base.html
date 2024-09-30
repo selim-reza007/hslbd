@@ -25,6 +25,12 @@
           <li class="my-2"><a class="sidebar-link {% if 'products' in request.path %}active {% endif %}" href="{% url 'products:list-product' %}">Products</a></li>
           <li class="my-2"><a class="sidebar-link{% if 'gallery' in request.path %} active{% endif %}" href="{% url 'gallary:dasboard-gallery' %}">Gallery</a></li>
           <li class="my-2"><a class="sidebar-link {% if 'messages' in request.path %}active{% endif %}" href="{% url 'contactus:requested-msg' %}">Messages</a></li>
+          <li class="mt-5">
+            <form action="{% url 'user:user-logout' %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </form>
+          </li>
         </ul>
       </div>
       

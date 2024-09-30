@@ -19,3 +19,14 @@ def loginView(request):
     else:
         form = AuthenticationForm()
     return render(request, 'user/login.html', { 'form' : form })
+
+def logoutView(request):
+    if request.method == "POST":
+        try:
+            logout(request)
+            return redirect('home')
+        except IntegrityError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
+        except DatabaseError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
+            
