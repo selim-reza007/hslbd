@@ -49,7 +49,7 @@ def editBrandView(request, slug):
             return HttpResponse("Database error occured")
     else:
         form = CreateBrand(instance=obj)
-        return render(request,'brand/dashboard/create.html', { 'form' : form })
+    return render(request,'brand/dashboard/create.html', { 'form' : form })
 
 #delete brand item
 @login_required(login_url='/admin/')

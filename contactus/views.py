@@ -25,7 +25,7 @@ def contactUsView(request):
             return HttpResponse("Database error occured")
     else:
         form = MessageRequest()
-        return render(request, 'contactus/contact-us.html', { 'form' : form })
+    return render(request, 'contactus/contact-us.html', { 'form' : form })
 
 #listing all received message in dashboard view
 @login_required(login_url='/admin/')

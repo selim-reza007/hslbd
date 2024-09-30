@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.db import IntegrityError, DatabaseError
 
 # Create your views here.
+#renders login view and login user to the system
 def loginView(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -19,6 +20,7 @@ def loginView(request):
         form = AuthenticationForm()
     return render(request, 'user/login.html', { 'form' : form })
 
+#logout the user from the system
 def logoutView(request):
     if request.method == "POST":
         try:

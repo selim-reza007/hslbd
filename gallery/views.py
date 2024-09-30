@@ -59,7 +59,8 @@ def editImageView(request, slug):
             return HttpResponse("Integrity error occured.")
         except DatabaseError:
             return HttpResponse("Database error occured.")
-    form = AddImage(instance=item)
+    else:
+        form = AddImage(instance=item)
     return render(request, 'gallery/dashboard/add-image.html', { 'form' : form })
 
 #delete image
@@ -68,6 +69,6 @@ def deleteImageView(request, slug):
     if request.method == "POST":
         item = get_object_or_404(Gallery ,id=slug)
         if item:
-            # item.delete()
+            item.delete()
             messages.success(request,"The Image has been deleted successfully!")
             return redirect('gallary:dasboard-gallery')
