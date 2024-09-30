@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 # Display all products list to normal view
 def productsListView(request):
     try:
-        data = Products.objects.all()
+        data = Products.objects.all().order_by('-id')
         return render(request, 'products/list.html', { 'products' : data, 'title' : 'List of All Products' })
     except IntegrityError:
         return HttpResponse("Integrity error occured")
@@ -62,7 +62,7 @@ def productDetailDashboardView(request, slug):
 @login_required(login_url='/admin/')
 def productDashboardView(request):
     try:
-        data = Products.objects.all()
+        data = Products.objects.all().order_by('-id')
         return render(request, 'products/dashboard/list-porduct.html', { 'products' : data })
     except ObjectDoesNotExist:
         return HttpResponse("Item not found", status=404)
@@ -88,13 +88,12 @@ def addNewProductView(request):
             return HttpResponse("Database error occurred", status=500)
     else:
         form = CreateProduct()
-        return render(request, 'products/dashboard/add-product.html', { 'form' : form })
+    return render(request, 'products/dashboard/add-product.html', { 'form' : form })
 
 #edting exissting product
 @login_required(login_url='/admin/')
 def editProductView(request, slug):
     obj = Products.objects.get(id=slug)
-    form = CreateProduct(instance=obj)
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES, instance=obj)
         try:
@@ -108,7 +107,8 @@ def editProductView(request, slug):
         except DatabaseError:
             return HttpResponse("Database error", status=500)
     else:
-        return render(request, 'products/dashboard/add-product.html', { 'form' : form })
+        form = CreateProduct(instance=obj)
+    return render(request, 'products/dashboard/add-product.html', { 'form' : form })
     
 #delete product
 @login_required(login_url='/admin/')

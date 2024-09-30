@@ -1,6 +1,8 @@
 from django import forms
 from .models import Products
 
+max_size = 1 * 1024 * 1024
+allowed_extension = ['jpeg', 'jpg', 'png']
 
 class CreateProduct(forms.ModelForm):
     class Meta:
@@ -28,3 +30,16 @@ class CreateProduct(forms.ModelForm):
             'productImage' : 'Product Image'
         }
     productImage = forms.ImageField(label='Product Image', required=False, widget=forms.FileInput)
+
+    def clean_productImage(self):
+        file = self.cleaned_data.get('productImage')
+
+        if file:
+            if file.size > max_size:
+                raise forms.ValidationError("File size should be less than 1MB")
+            
+            extension = file.name.split('.')[-1].lower()
+            if extension not in allowed_extension:
+                raise forms.ValidationError("Not allowed file format. Allowed formats are jpeg, jpg, png")
+        
+        return file
