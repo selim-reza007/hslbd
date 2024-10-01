@@ -30,16 +30,22 @@ class CreateProduct(forms.ModelForm):
             'productImage' : 'Product Image'
         }
 
-    def clean_productImage(self):
-        file = self.cleaned_data.get('productImage')
-        if not file and self.instance.pk:
-            return self.instance.productImage
-        if file:
-            if file.size > max_size:
-                raise forms.ValidationError("File size should be less than 1MB")
-        
-        extension = file.name.split('.')[-1].lower()
-        if extension not in allowed_extension:
-            raise forms.ValidationError("Not allowed file format. Allowed formats are jpeg, jpg, png")
+        def clean_productImage(self):
+            file = self.cleaned_data.get('productImage')
 
-        return file
+            # If no file is uploaded and no image exists in the instance, let the model's default handle it
+            if not file:
+                return None  # This will use the model's default 'fallback.jpg' if the image field is left blank
+
+            # Validate file if uploaded
+            if file:
+                # Check file size
+                if file.size > max_size:
+                    raise forms.ValidationError("File size should be less than 1MB")
+
+            # Check file extension
+            extension = file.name.split('.')[-1].lower()
+            if extension not in allowed_extension:
+                raise forms.ValidationError("Not allowed file format. Allowed formats are jpeg, jpg, png")
+
+            return file

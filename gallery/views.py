@@ -12,9 +12,9 @@ def galleryView(request):
     try:
         data = Gallery.objects.all()
     except IntegrityError:
-        return HttpResponse("Integrity error occured.")
+        return HttpResponse("Integrity error occurred.")
     except DatabaseError:
-        return HttpResponse("Database error occured.")
+        return HttpResponse("Database error occurred.")
     return render(request, 'gallery/gallery.html', { 'images' : data })
 
 #pulling data from database to display in dashboard view
@@ -23,9 +23,9 @@ def dashboardGalleryView(request):
     try:
         data = Gallery.objects.all()
     except IntegrityError:
-        return HttpResponse("Integrity error occured.")
+        return HttpResponse("Integrity error occurred.")
     except DatabaseError:
-        return HttpResponse("Database error occured.")
+        return HttpResponse("Database error occurred.")
     return render(request, 'gallery/dashboard/gallery.html', { 'images' : data })
 
 # add image
@@ -33,14 +33,14 @@ def dashboardGalleryView(request):
 def addNewImageView(request):
     if request.method == "POST":
         form = AddImage(request.POST, request.FILES)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 return redirect('gallary:dasboard-gallery')
-        except IntegrityError:
-            return HttpResponse("Integrity error occured.")
-        except DatabaseError:
-            return HttpResponse("Database error occured.")
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred.")
+            except DatabaseError:
+                return HttpResponse("Database error occurred.")
     else:
         form = AddImage()
     return render(request, 'gallery/dashboard/add-image.html', { 'form' : form })
@@ -51,14 +51,14 @@ def editImageView(request, slug):
     item = Gallery.objects.get(id=slug)
     if request.method == "POST":
         form = AddImage(request.POST, request.FILES, instance=item)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 return redirect('gallary:dasboard-gallery')
-        except IntegrityError:
-            return HttpResponse("Integrity error occured.")
-        except DatabaseError:
-            return HttpResponse("Database error occured.")
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred.")
+            except DatabaseError:
+                return HttpResponse("Database error occurred.")
     else:
         form = AddImage(instance=item)
     return render(request, 'gallery/dashboard/add-image.html', { 'form' : form })
@@ -69,6 +69,11 @@ def deleteImageView(request, slug):
     if request.method == "POST":
         item = get_object_or_404(Gallery ,id=slug)
         if item:
-            item.delete()
-            messages.success(request,"The Image has been deleted successfully!")
-            return redirect('gallary:dasboard-gallery')
+            try:
+                item.delete()
+                messages.success(request,"The Image has been deleted successfully!")
+                return redirect('gallary:dasboard-gallery')
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred.")
+            except DatabaseError:
+                return HttpResponse("Database error occurred.")

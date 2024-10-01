@@ -11,9 +11,9 @@ def brandsListView(request):
     try:
         data = Brands.objects.all()
     except IntegrityError:
-        return HttpResponse("Integrity error occured")
+        return HttpResponse("Integrity error occurred")
     except DatabaseError:
-        return HttpResponse("Database error occured")
+        return HttpResponse("Database error occurred")
     return render(request, 'brand/dashboard/list.html', { 'brands' : data })
 
 # create new brand
@@ -26,9 +26,9 @@ def createBrandView(request):
                 form.save()
                 return redirect('brand:brand-list')
             except IntegrityError:
-                return HttpResponse("Integrity error occured")
+                return HttpResponse("Integrity error occurred")
             except DatabaseError:
-                return HttpResponse("Database error occured")
+                return HttpResponse("Database error occurred")
     else:
         form = CreateBrand()
     return render(request, 'brand/dashboard/create.html', { 'form' : form })
@@ -39,14 +39,14 @@ def editBrandView(request, slug):
     obj = get_object_or_404(Brands ,id=slug)
     if request.method == "POST":
         form = CreateBrand(request.POST, instance=obj)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 return redirect('brand:brand-list')
-        except IntegrityError:
-            return HttpResponse("Integrity error occured")
-        except DatabaseError:
-            return HttpResponse("Database error occured")
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred")
+            except DatabaseError:
+                return HttpResponse("Database error occurred")
     else:
         form = CreateBrand(instance=obj)
     return render(request,'brand/dashboard/create.html', { 'form' : form })
@@ -56,5 +56,8 @@ def editBrandView(request, slug):
 def deleteBrandView(request, slug):
     if request.method == "POST":
         obj = get_object_or_404(Brands ,id=slug)
-        obj.delete()
-        return redirect('brand:brand-list')
+        try:
+            obj.delete()
+            return redirect('brand:brand-list')
+        except DatabaseError:
+            return HttpResponse("Database error occurred")

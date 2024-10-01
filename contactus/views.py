@@ -12,17 +12,17 @@ from django.contrib.auth.decorators import login_required
 def contactUsView(request):
     if request.method == "POST":
         form = MessageRequest(request.POST)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 messages.success(request, 'We have received your message. We will contact you soon.')
                 return redirect('contactus:contactus')
-            else:
-                return render(request, 'contactus/contact-us.html', { 'form' : form })
-        except IntegrityError:
-            return HttpResponse("Integrity error occured")
-        except DatabaseError:
-            return HttpResponse("Database error occured")
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred.")
+            except DatabaseError:
+                return HttpResponse("Database error occurred.")
+        else:
+            return render(request, 'contactus/contact-us.html', { 'form' : form })
     else:
         form = MessageRequest()
     return render(request, 'contactus/contact-us.html', { 'form' : form })
@@ -36,9 +36,9 @@ def requestedMsgView(request):
         page_number = request.GET.get('page')
         page_obj = myPaginator.get_page(page_number)
     except IntegrityError:
-        return HttpResponse("Integrity error occured")
+        return HttpResponse("Integrity error occurred.")
     except DatabaseError:
-        return HttpResponse("Database error occured")
+        return HttpResponse("Database error occurred.")
     return render(request, 'contactus/dashboard/messages-list.html', { 'messagesData' : page_obj })
 
 #displaying message info in dashboard
@@ -50,22 +50,22 @@ def messageDetailsView(request, slug):
         datum.save()
         return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
     except IntegrityError:
-        return HttpResponse("Integrity error occured!")
+        return HttpResponse("Integrity error occurred.!")
 
 #updating requested message status from false to true 
 @login_required(login_url='/admin/')
 def updateMsgStatus(request):
     if request.method == "POST":
         if 'msgId' in request.POST:
+            datum = get_object_or_404(Message, id=request.POST.get('msgId'))
+            datum.status = True
             try:
-                datum = get_object_or_404(Message, id=request.POST.get('msgId'))
-                datum.status = True
                 datum.save()
                 return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
             except IntegrityError:
-                return HttpResponse("Integrity error occured")
+                return HttpResponse("Integrity error occurred.")
             except DatabaseError:
-                return HttpResponse("Database error occured")
+                return HttpResponse("Database error occurred.")
             
 #delete message
 @login_required(login_url='/admin/')
@@ -85,5 +85,5 @@ def unreadMsgCount(request):
     try:
         data = Message.objects.filter(messageRead=False).count()
     except DatabaseError:
-        return HttpResponse("Database error occured")
+        return HttpResponse("Database error occurred.")
     return data

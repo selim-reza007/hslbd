@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .forms import CreateProduct
 from .models import Products
 from django.contrib import messages
@@ -14,9 +14,9 @@ def productsListView(request):
         data = Products.objects.all().order_by('-id')
         return render(request, 'products/list.html', { 'products' : data, 'title' : 'List of All Products' })
     except IntegrityError:
-        return HttpResponse("Integrity error occured")
+        return HttpResponse("Integrity error occurred")
     except DatabaseError:
-        return HttpResponse("Database error occured")
+        return HttpResponse("Database error occurred")
 
 #display products list by brand in normal view
 def productsListByBrandView(request, slug):
@@ -25,9 +25,9 @@ def productsListByBrandView(request, slug):
         brandName = Brands.objects.get(id=slug).brandName
         return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products' })
     except IntegrityError:
-        return HttpResponse("Integrity error occured")
+        return HttpResponse("Integrity error occurred")
     except DatabaseError:
-        return HttpResponse("Database error occured")
+        return HttpResponse("Database error occurred")
     except ObjectDoesNotExist:
         return HttpResponse("Object not found")
 
@@ -40,9 +40,9 @@ def productDetailView(request, slug):
     except ObjectDoesNotExist:
         return HttpResponse('Item not found', status=404)
     except IntegrityError:
-        return HttpResponse('Integrity error occured', status=40)
+        return HttpResponse('Integrity error occurred', status=40)
     except DatabaseError:
-        return HttpResponse('Database error occured', status=500)
+        return HttpResponse('Database error occurred', status=500)
 
 #dashboard's views
 #Viewing product info from dashboard
@@ -54,9 +54,9 @@ def productDetailDashboardView(request, slug):
     except ObjectDoesNotExist:
         return HttpResponse('Item not found', status=404)
     except IntegrityError:
-        return HttpResponse('Integrity error occured', status=40)
+        return HttpResponse('Integrity error occurred', status=40)
     except DatabaseError:
-        return HttpResponse('Database error occured', status=500)
+        return HttpResponse('Database error occurred', status=500)
 
 #Viewing products list from dashboard
 @login_required(login_url='/admin/')
@@ -76,17 +76,17 @@ def productDashboardView(request):
 def addNewProductView(request):
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 messages.success(request, "New product information is added successfully")
                 return redirect('products:list-product')
-        except ObjectDoesNotExist:
-            return HttpResponse("Item not found", status=404)
-        except IntegrityError:
-            return HttpResponse("Integrity error occurred", status=40)
-        except DatabaseError:
-            return HttpResponse("Database error occurred", status=500)
+            except ObjectDoesNotExist:
+                return HttpResponse("Item not found", status=404)
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred", status=40)
+            except DatabaseError:
+                return HttpResponse("Database error occurred", status=500)
     else:
         form = CreateProduct()
     return render(request, 'products/dashboard/add-product.html', { 'form' : form })
@@ -97,17 +97,17 @@ def editProductView(request, slug):
     obj = Products.objects.get(id=slug)
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES, instance=obj)
-        try:
-            if form.is_valid():
+        if form.is_valid():
+            try:
                 form.save()
                 messages.success(request, f"{obj.productName}'s data is updated!")
                 return redirect('products:list-product')
-        except ObjectDoesNotExist:
-            return HttpResponse("Item not found", status=404)
-        except IntegrityError:
-            return HttpResponse("Integrity error occured", status=40)
-        except DatabaseError:
-            return HttpResponse("Database error", status=500)
+            except ObjectDoesNotExist:
+                return HttpResponse("Item not found", status=404)
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred", status=40)
+            except DatabaseError:
+                return HttpResponse("Database error", status=500)
     else:
         form = CreateProduct(instance=obj)
     return render(request, 'products/dashboard/add-product.html', { 'form' : form })
@@ -116,18 +116,17 @@ def editProductView(request, slug):
 @login_required(login_url='/admin/')
 def deleteProductView(request, slug):
     if request.method == "POST":
-        try:
-            obj = Products.objects.get(id=slug)
-            if obj:
+        obj = get_object_or_404(Products, id=slug)
+        if obj:
+            try:
                 obj.delete()
                 messages.success(request, f"{obj.productName} deleted successfully.")
                 return redirect('products:list-product')
-            else:
-                return HttpResponse("Product not found.")
-        except ObjectDoesNotExist:
-            return HttpResponse("Item not found", status=404)
-        except IntegrityError:
-            return HttpResponse("Integrity error occured", status=40)
-        except DatabaseError:
-            return HttpResponse("Database error", status=500)
-        
+            except ObjectDoesNotExist:
+                return HttpResponse("Item not found", status=404)
+            except IntegrityError:
+                return HttpResponse("Integrity error occurred", status=40)
+            except DatabaseError:
+                return HttpResponse("Database error", status=500)
+        else:
+            return HttpResponse("Product not found.")
