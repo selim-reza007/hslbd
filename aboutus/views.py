@@ -30,8 +30,8 @@ def createAboutUsView(request):
     return render(request, 'aboutus/dashboard/create.html', { 'form' : form})
 
 @login_required(login_url='/admin/')
-def updateAboutUsView(request, slug):
-    obj = get_object_or_404(CompanyInfo, id=slug)
+def updateAboutUsView(request, id):
+    obj = get_object_or_404(CompanyInfo, id=id)
     if request.method == "POST":
         form = CreateCompanyProfile(request.POST, request.FILES, instance=obj)
         if form.is_valid():

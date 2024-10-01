@@ -27,8 +27,8 @@ All Brands list
                     <td>{{ brand.brandName }}</td>
                     <td>{{ brand.country }}</td>
                     <td>
-                        <a class="btn btn-warning" href="{% url 'brand:brand-edit' slug=brand.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                        <form class="d-inline-block" action="{% url 'brand:brand-delete' slug=brand.id %}" method="post">
+                        <a class="btn btn-warning" href="{% url 'brand:brand-edit' id=brand.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <form class="d-inline-block" action="{% url 'brand:brand-delete' id=brand.id %}" method="post">
                             {% csrf_token %}
                             <button onclick="return deleteFun('Brand')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
                         </form>

@@ -44,7 +44,7 @@
                         </div>
                     </form>
                 </div>
-                <form class="mt-3" action="{% url 'contactus:delete-msg' slug=message.id %}" method="post">
+                <form class="mt-3" action="{% url 'contactus:delete-msg' id=message.id %}" method="post">
                     {% csrf_token %}
                     <button onclick="return deleteFun('message')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
                 </form>

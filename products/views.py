@@ -17,10 +17,10 @@ def productsListView(request):
         return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 #display products list by brand in normal view
-def productsListByBrandView(request, slug):
+def productsListByBrandView(request, id):
     try:
-        data = Products.objects.filter(barndName=slug)
-        brandName = Brands.objects.get(id=slug).brandName
+        data = Products.objects.filter(barndName=id)
+        brandName = Brands.objects.get(id=id).brandName
         return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products' })
     except DatabaseError:
         return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
@@ -28,10 +28,10 @@ def productsListByBrandView(request, slug):
         return render(request, 'Error.html', { 'errorMsg' : 'Objects not found!' })
 
 #detailed product view in normal view
-def productDetailView(request, slug):
+def productDetailView(request, id):
     try:
         data = Products.objects.all()[:5] #getting 5 products data
-        datum = get_object_or_404(Products, id=slug)
+        datum = get_object_or_404(Products, id=id)
         return render(request, 'products/product-details.html', { 'product' : datum, 'products' : data })
     except ObjectDoesNotExist:
         return render(request, 'Error.html', { 'errorMsg' : 'Object not found!' })
@@ -41,8 +41,8 @@ def productDetailView(request, slug):
 #dashboard's views
 #Viewing product info from dashboard
 @login_required(login_url='/admin/')
-def productDetailDashboardView(request, slug):
-    datum = get_object_or_404(Products, id=slug)
+def productDetailDashboardView(request, id):
+    datum = get_object_or_404(Products, id=id)
     return render(request, 'products/dashboard/product-details.html', { 'product' : datum })
 
 #Viewing products list from dashboard
@@ -76,8 +76,8 @@ def addNewProductView(request):
 
 #edting exissting product
 @login_required(login_url='/admin/')
-def editProductView(request, slug):
-    obj = get_object_or_404(Products, id=slug)
+def editProductView(request, id):
+    obj = get_object_or_404(Products, id=id)
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES, instance=obj)
         if form.is_valid():
@@ -95,9 +95,9 @@ def editProductView(request, slug):
     
 #delete product
 @login_required(login_url='/admin/')
-def deleteProductView(request, slug):
+def deleteProductView(request, id):
     if request.method == "POST":
-        obj = get_object_or_404(Products, id=slug)
+        obj = get_object_or_404(Products, id=id)
         if obj:
             try:
                 obj.delete()

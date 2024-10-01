@@ -7,6 +7,6 @@ app_name = "brand"
 urlpatterns = [
     path('dashboard/list/', views.brandsListView, name='brand-list'), #display all brands
     path('dashboard/add/', views.createBrandView, name='brand-add'), #Add brand
-    path('dashboard/edit/<slug:slug>/', views.editBrandView, name='brand-edit'), #edit brand
-    path('dashboard/delete/<slug:slug>/', views.deleteBrandView, name='brand-delete'), #delete brand
+    path('dashboard/edit/<int:id>/', views.editBrandView, name='brand-edit'), #edit brand
+    path('dashboard/delete/<int:id>/', views.deleteBrandView, name='brand-delete'), #delete brand
 ]

@@ -33,8 +33,8 @@ def createBrandView(request):
 
 # update brand
 @login_required(login_url='/admin/')
-def editBrandView(request, slug):
-    obj = get_object_or_404(Brands ,id=slug)
+def editBrandView(request, id):
+    obj = get_object_or_404(Brands ,id=id)
     if request.method == "POST":
         form = CreateBrand(request.POST, instance=obj)
         if form.is_valid():
@@ -51,9 +51,9 @@ def editBrandView(request, slug):
 
 #delete brand item
 @login_required(login_url='/admin/')
-def deleteBrandView(request, slug):
+def deleteBrandView(request, id):
     if request.method == "POST":
-        obj = get_object_or_404(Brands ,id=slug)
+        obj = get_object_or_404(Brands ,id=id)
         try:
             obj.delete()
             return redirect('brand:brand-list')

@@ -48,9 +48,9 @@
                       <!--Action section of product-->
                       <div class="">
                         
-                        <a class="btn btn-warning px-3" href="{% url 'products:edit' slug=product.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                        <a class="btn btn-warning px-3" href="{% url 'products:edit' id=product.id %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                         
-                        <form class="d-inline-block" action="{% url 'products:delete' slug=product.id %}" method="post">
+                        <form class="d-inline-block" action="{% url 'products:delete' id=product.id %}" method="post">
                           {% csrf_token %}
                           <button onclick="return deleteFun('Product')" class="btn btn-danger px-3"><i class="fa-solid fa-trash"></i> Delete</button>
                         </form>

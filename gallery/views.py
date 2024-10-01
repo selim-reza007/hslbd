@@ -43,8 +43,8 @@ def addNewImageView(request):
 
 # edit image
 @login_required(login_url='/admin/')
-def editImageView(request, slug):
-    item = get_object_or_404(Gallery, id=slug)
+def editImageView(request, id):
+    item = get_object_or_404(Gallery, id=id)
     if request.method == "POST":
         form = AddImage(request.POST, request.FILES, instance=item)
         if form.is_valid():
@@ -61,9 +61,9 @@ def editImageView(request, slug):
 
 #delete image
 @login_required(login_url='/admin/')
-def deleteImageView(request, slug):
+def deleteImageView(request, id):
     if request.method == "POST":
-        item = get_object_or_404(Gallery ,id=slug)
+        item = get_object_or_404(Gallery ,id=id)
         if item:
             try:
                 item.delete()

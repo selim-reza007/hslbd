@@ -14,7 +14,7 @@
           {% for brand in brands %}
             <div class="col brand-card">
               <div class="card text-center">
-                <a href="{% url 'products:by-brand' slug=brand.id %}">
+                <a href="{% url 'products:by-brand' id=brand.id %}">
                   <div class="card-body">
                     <h5 class="card-title">{{ brand.brandName }}</h5>
                   </div>

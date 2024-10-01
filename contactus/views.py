@@ -41,8 +41,8 @@ def requestedMsgView(request):
 
 #displaying message info in dashboard
 @login_required(login_url='/admin/')
-def messageDetailsView(request, slug):
-    datum = get_object_or_404(Message, id=slug)
+def messageDetailsView(request, id):
+    datum = get_object_or_404(Message, id=id)
     datum.messageRead = True
     try:
         datum.save()
@@ -69,9 +69,9 @@ def updateMsgStatus(request):
             
 #delete message
 @login_required(login_url='/admin/')
-def deleteMsg(request, slug):
+def deleteMsg(request, id):
     if request.method == "POST":
-        datum = get_object_or_404(Message, id=slug)
+        datum = get_object_or_404(Message, id=id)
         try:
             datum.delete()
             messages.success(request, f"Message sent from {datum.email} has been deleted.")
