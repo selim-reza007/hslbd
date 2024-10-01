@@ -13,6 +13,9 @@ class CreateCompanyProfile(forms.ModelForm):
     def clean_profile(self):
         file = self.cleaned_data.get('profile')
 
+        if not file:
+            return None
+
         if file:
             # File size validation
             if file.size > max_size:
