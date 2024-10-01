@@ -18,9 +18,9 @@ def contactUsView(request):
                 messages.success(request, 'We have received your message. We will contact you soon.')
                 return redirect('contactus:contactus')
             except IntegrityError:
-                return HttpResponse("Integrity error occurred.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occurred.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
         else:
             return render(request, 'contactus/contact-us.html', { 'form' : form })
     else:
@@ -35,11 +35,9 @@ def requestedMsgView(request):
         myPaginator = Paginator(data, 9)
         page_number = request.GET.get('page')
         page_obj = myPaginator.get_page(page_number)
-    except IntegrityError:
-        return HttpResponse("Integrity error occurred.")
+        return render(request, 'contactus/dashboard/messages-list.html', { 'messagesData' : page_obj })
     except DatabaseError:
-        return HttpResponse("Database error occurred.")
-    return render(request, 'contactus/dashboard/messages-list.html', { 'messagesData' : page_obj })
+        return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 #displaying message info in dashboard
 @login_required(login_url='/admin/')
@@ -50,7 +48,9 @@ def messageDetailsView(request, slug):
         datum.save()
         return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
     except IntegrityError:
-        return HttpResponse("Integrity error occurred.!")
+        return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
+    except DatabaseError:
+        return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 #updating requested message status from false to true 
 @login_required(login_url='/admin/')
@@ -63,9 +63,9 @@ def updateMsgStatus(request):
                 datum.save()
                 return render(request, 'contactus/dashboard/message-body.html', { 'message' : datum })
             except IntegrityError:
-                return HttpResponse("Integrity error occurred.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occurred.")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
             
 #delete message
 @login_required(login_url='/admin/')
@@ -75,15 +75,17 @@ def deleteMsg(request, slug):
         try:
             datum.delete()
             messages.success(request, f"Message sent from {datum.email} has been deleted.")
+            return redirect('contactus:requested-msg')
         except IntegrityError:
-            return HttpResponse("An error occurred while trying to delete the message.")
-        return redirect('contactus:requested-msg')
+            return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
+        except DatabaseError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 #counting the number of unread messages
 @login_required(login_url='/admin/')
 def unreadMsgCount(request):
     try:
         data = Message.objects.filter(messageRead=False).count()
+        return data
     except DatabaseError:
-        return HttpResponse("Database error occurred.")
-    return data
+        return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })

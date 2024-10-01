@@ -10,11 +10,9 @@ from django.contrib.auth.decorators import login_required
 def brandsListView(request):
     try:
         data = Brands.objects.all()
-    except IntegrityError:
-        return HttpResponse("Integrity error occurred")
+        return render(request, 'brand/dashboard/list.html', { 'brands' : data })
     except DatabaseError:
-        return HttpResponse("Database error occurred")
-    return render(request, 'brand/dashboard/list.html', { 'brands' : data })
+        return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 # create new brand
 @login_required(login_url='/admin/')
@@ -26,9 +24,9 @@ def createBrandView(request):
                 form.save()
                 return redirect('brand:brand-list')
             except IntegrityError:
-                return HttpResponse("Integrity error occurred")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occurred")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateBrand()
     return render(request, 'brand/dashboard/create.html', { 'form' : form })
@@ -44,9 +42,9 @@ def editBrandView(request, slug):
                 form.save()
                 return redirect('brand:brand-list')
             except IntegrityError:
-                return HttpResponse("Integrity error occurred")
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
             except DatabaseError:
-                return HttpResponse("Database error occurred")
+                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateBrand(instance=obj)
     return render(request,'brand/dashboard/create.html', { 'form' : form })
@@ -59,5 +57,7 @@ def deleteBrandView(request, slug):
         try:
             obj.delete()
             return redirect('brand:brand-list')
+        except IntegrityError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
         except DatabaseError:
-            return HttpResponse("Database error occurred")
+            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
