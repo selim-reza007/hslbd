@@ -6,6 +6,9 @@ from django.db import IntegrityError, DatabaseError
 # Create your views here.
 #renders login view and login user to the system
 def loginView(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
