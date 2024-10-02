@@ -6,6 +6,7 @@ from django.conf import settings
 
 
 urlpatterns = [
+    path('super/admin/', admin.site.urls),
     path('', views.homeView, name='home'),  # Loads home page
     path('dashboard/', views.dashboardView, name='dashboard'),
     path('products/', include('products.urls')),
