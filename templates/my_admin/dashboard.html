@@ -63,5 +63,8 @@
     <p class="display-3 text-danger">You haven't added company profile yet!</p>
     <a href="{% url 'aboutus:add-info' %}" class="d-inline-block btn btn-primary">Add company Profile</a>
   {% endif %}
+
+  <a class="btn btn-warning mt-3" href="{% url 'user:change_password' %}">Change password</a>
+
 </div>
 {% endblock content %}

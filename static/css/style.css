@@ -139,7 +139,7 @@ a {
 .admin-body {
     .container-fluid {
 
-        .d-flex {
+        .l-sidebar-h {
             height: 100vh;
 
             .sidebar {
