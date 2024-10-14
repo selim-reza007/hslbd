@@ -11,7 +11,7 @@ class Type(models.Model):
 
 #category class
 class Category(models.Model):
-    categoryName = models.CharField(100)
+    categoryName = models.CharField(max_length=100)
     typeName = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
