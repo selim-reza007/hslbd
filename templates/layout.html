@@ -27,6 +27,17 @@
                   <li class="nav-item">
                     <a class="nav-link {% if 'products' in request.path %}active{% endif %}" aria-current="page" href="{% url 'products:all-products' %}">Products</a>
                   </li>
+                  {% comment %} dropdown {% endcomment %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item border-bottom" href="#">Action</a></li>
+                      <li><a class="dropdown-item border-bottom" href="#">Another action</a></li>
+                    </ul>
+                  </li>
+                  {% comment %} dropdown end {% endcomment %}
                   <li class="nav-item">
                     <a class="nav-link {% if request.path == '/gallery/' %}active{% endif %}" aria-current="page" href="{% url 'gallary:gallary' %}">Gallery</a>
                   </li>
