@@ -5,11 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.db import DatabaseError
 
 def homeView(request):
-    try:
-        data = Products.objects.all()[:3]
-        return render(request, 'index.html', { 'products' : data })
-    except DatabaseError:
-        return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
+    data = Products.objects.all()[:3]
+    print("Products data: ",data)
+    return render(request, 'index.html', { 'products' : data })
 
 @login_required(login_url='/admin/')
 def dashboardView(request):

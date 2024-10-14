@@ -12,7 +12,7 @@ class Type(models.Model):
 #category class
 class Category(models.Model):
     categoryName = models.CharField(max_length=100)
-    typeName = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
+    typeTitle = models.ForeignKey(Type, on_delete=models.CASCADE, null=True,blank=True)
 
     def __str__(self):
         return self.categoryName
@@ -20,8 +20,8 @@ class Category(models.Model):
 # Create your models here.
 class Products(models.Model):
     productName = models.CharField(max_length=150)
-    barndName = models.ForeignKey(Brands, on_delete=models.CASCADE, default=None)
-    categoryName = models.ForeignKey(Category, on_delete=models.CASCADE, default=None)
+    barndName = models.ForeignKey(Brands, on_delete=models.CASCADE, null=True,blank=True)
+    categoryTitle = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,blank=True)
     info1 = models.CharField(max_length=200, blank=True)
     info2 = models.CharField(max_length=200, blank=True)
     info3 = models.CharField(max_length=200, blank=True)

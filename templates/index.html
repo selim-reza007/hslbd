@@ -26,9 +26,13 @@ Healthcare Solutions Limited
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 px-5 my-4">
           
+          {% if products %}
           {% for product in products %}
             {% include "components/_single_product.html" with product=product %}
           {% endfor %}
+          {% else %}
+            <p class="display-2 text-danger">Sorry, Product is empty!</p>
+          {% endif %}
           
         </div>
         <div class="row justify-content-center">
