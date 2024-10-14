@@ -1,10 +1,27 @@
 from django.db import models
 from brand.models import Brands
 
+
+#type class
+class Type(models.Model):
+    typeName = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.typeName
+
+#category class
+class Category(models.Model):
+    categoryName = models.CharField(100)
+    typeName = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.categoryName
+
 # Create your models here.
 class Products(models.Model):
     productName = models.CharField(max_length=150)
     barndName = models.ForeignKey(Brands, on_delete=models.CASCADE, default=None)
+    categoryName = models.ForeignKey(Category, on_delete=models.CASCADE, default=None)
     info1 = models.CharField(max_length=200, blank=True)
     info2 = models.CharField(max_length=200, blank=True)
     info3 = models.CharField(max_length=200, blank=True)
@@ -25,4 +42,3 @@ class Products(models.Model):
 
     def __str__(self):
         return self.productName
-    
