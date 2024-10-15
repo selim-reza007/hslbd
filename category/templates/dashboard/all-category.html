@@ -7,6 +7,39 @@ All Categories list
 {% block content %}
 <div class="">
     <p class="h2 bg-success text-white text-center py-2 rounded mb-3">List of all Categories</p>
-    
+    {% if categories %}
+    <div class="table-responsive mt-4">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category title</th>
+                <th scope="col">Slug name</th>
+                <th scope="col">Type title</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <th scope="col">{{ forloop.counter }}</th>
+                <td>{{ category.categoryName }}</td>
+                <td>{{ category.slug }}</td>
+                <td>{{ category.typeTitle }}</td>
+                <td>
+                    <a class="btn btn-warning" href=""><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                    <form class="d-inline-block" action="" method="post">
+                        {% csrf_token %}
+                        <button onclick="return deleteFun('Brand')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="display-2 text-danger">Now category created yet!</p>
+    {% endif %}    
 </div>
 {% endblock content %}

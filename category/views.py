@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import CreateCategory
 from django.db import IntegrityError, DatabaseError
-
+from products.models import Category
 # Create your views here.
 
 #listing out all created categories
 def allCategoriesView(request):
-    return render(request, 'dashboard/all-category.html')
+    data = Category.objects.all()
+    return render(request, 'dashboard/all-category.html', { 'categories' : data })
 
 #Creating new category
 def addCategoryView(request):
