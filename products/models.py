@@ -5,6 +5,7 @@ from brand.models import Brands
 #type class
 class Type(models.Model):
     typeName = models.CharField(max_length=30)
+    slug = models.CharField(max_length=30, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.typeName
@@ -12,6 +13,7 @@ class Type(models.Model):
 #category class
 class Category(models.Model):
     categoryName = models.CharField(max_length=100)
+    slug = models.CharField(max_length=30, default=None, null=True, blank=True)
     typeTitle = models.ForeignKey(Type, on_delete=models.CASCADE, null=True,blank=True)
 
     def __str__(self):
