@@ -3,6 +3,12 @@ from .forms import CreateCategory
 from django.db import IntegrityError, DatabaseError
 
 # Create your views here.
+
+#listing out all created categories
+def allCategoriesView(request):
+    return render(request, 'dashboard/all-category.html')
+
+#Creating new category
 def addCategoryView(request):
     if request.method == "POST":
         form = CreateCategory(request.POST)
