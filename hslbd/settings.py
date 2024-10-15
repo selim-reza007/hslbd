@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'contactus',
     'brand',
     'user',
+    'category',
     'crispy_forms',
     'crispy_bootstrap5',
 ]
