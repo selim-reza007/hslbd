@@ -7,6 +7,7 @@ urlpatterns = [
     path('all/', views.productsListView, name="all-products"),#display all products in normal view
     path('dashboard/list/', views.productDashboardView, name='list-product'), #Listing all Products in Dashboard
     path('dashboard/add/', views.addNewProductView, name='add-product'), #adding product
+    path('dashboard/types/', views.loadAllTypesView, name='load-types'), #listing all types to dashboard
     path('<int:id>/list/', views.productsListByBrandView, name='by-brand'), #display products by brand
     path('details/<int:id>/', views.productDetailView, name='details'), #details info in Normal view
     path('dashboard/edit/<int:id>/', views.editProductView, name='edit'), #edting product

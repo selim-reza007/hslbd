@@ -1,0 +1,27 @@
+{% extends "my_admin\base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Select Product type
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Select product type</p>
+
+        <div class="row g-3">
+
+            {% for type in types %}
+            
+            <a class="col-md-4 text-dark outer-type-container" href="">
+                <div class="type-container rounded-3 d-flex justify-content-center align-items-center {% if forloop.counter in evens %}bg-color-blueSkies{% else %}bg-color-telegram{% endif %}">
+                    <p class="fw-bold">{{ type }}</p>
+                </div>
+            </a>
+            
+            {% endfor %}
+            
+        </div>
+
+    </div>
+{% endblock content %}

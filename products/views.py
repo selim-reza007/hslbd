@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, DatabaseError
 from brand.models import Brands
 from django.contrib.auth.decorators import login_required
+from .models import Type, Category
 
 # Create your views here.
 # Display all products list to normal view
@@ -68,11 +69,14 @@ def addNewProductView(request):
                 return redirect('products:list-product')
             except IntegrityError:
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
-            except DatabaseError:
-                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateProduct()
-    return render(request, 'products/dashboard/add-product.html', { 'form' : form })
+        try:
+            data = Category.objects.filter(typeTitle=3)
+            print( "Categories are : " ,data)
+            return render(request, 'products/dashboard/add-product.html', { 'form' : form})
+        except DatabaseError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
 #edting exissting product
 @login_required(login_url='/admin/')
@@ -109,3 +113,12 @@ def deleteProductView(request, id):
                 return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
         else:
             return HttpResponse("Product not found.")
+        
+
+#added after 16th october 2024
+def loadAllTypesView(request):
+    types = Type.objects.all()
+    evenNumbers = [1,3,5,7,9,11,13,15]
+    return render(request, 'products/dashboard/select-type.html', { 'types' : types, 'evens' : evenNumbers })
+
+# def createNewProductView(request):

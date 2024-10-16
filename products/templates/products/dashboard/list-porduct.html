@@ -7,7 +7,7 @@
 {% block content %}
     <div class="">
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">All Products</p>
-        <a href="{% url 'products:add-product' %}" class="btn btn-info mb-3">Add new Product</a>
+        <a href="{% url 'products:load-types' %}" class="btn btn-info mb-3">Add new Product</a>
         
         {% if messages %}
         <ul class="alert mx-3 alert-success list-unstyled alert-dismissible fade show" role="alert">
@@ -19,9 +19,13 @@
         {% endif %}
 
         <div class="mt-0 row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
-            {% for data in products %}
-                {% include "components/_single_product.html" with product=data %}
-            {% endfor %}
+            {% if products %}
+                {% for data in products %}
+                    {% include "components/_single_product.html" with product=data %}
+                {% endfor %}
+            {% else %}
+                <p class="display-2 text-danger">No product created!</p>
+            {% endif %}
         </div>
 
     </div>

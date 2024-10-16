@@ -7,7 +7,7 @@ All Categories list
 {% block content %}
 <div class="">
     <p class="h2 bg-success text-white text-center py-2 rounded mb-3">List of all Categories</p>
-    <a href="{% url 'category:add-category' %}" class="btn btn-info">Add new Category</a>
+    <a href="{% url 'category:add-category' %}" class="btn btn-info mb-2">Add new Category</a>
     {% if messages %}
         <ul class="alert alert-success list-unstyled alert-dismissible fade show" role="alert">
             {% for message in messages %}

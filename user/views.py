@@ -6,6 +6,7 @@ from django.db import IntegrityError, DatabaseError
 # Create your views here.
 #renders login view and login user to the system
 def loginView(request):
+    #redirect user to dashboard if he is already logged-in when tries to access login page
     if request.user.is_authenticated:
         return redirect('dashboard')
 
