@@ -7,10 +7,11 @@ allowed_extension = ['jpeg', 'jpg', 'png']
 class CreateProduct(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ['productName','barndName', 'info1', 'info2', 'info3', 'info4', 'info5', 'info6', 'info7', 'info8', 'info9', 'info10', 'info11', 'info12', 'info13', 'info14', 'info15', 'description', 'productImage']
+        fields = ['productName','barndName','categoryTitle', 'info1', 'info2', 'info3', 'info4', 'info5', 'info6', 'info7', 'info8', 'info9', 'info10', 'info11', 'info12', 'info13', 'info14', 'info15', 'description', 'productImage']
         labels = {
             'productName' : 'Product Name',
             'barndName' : 'Brand Name',
+            'categoryTitle' : 'Category',
             'info1' : 'Information field 1',
             'info2' : 'Information field 2',
             'info3' : 'Information field 3',

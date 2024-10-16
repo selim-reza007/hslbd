@@ -27,6 +27,7 @@ def dashboardGalleryView(request):
 # add image
 @login_required(login_url='/admin/')
 def addNewImageView(request):
+    form = AddImage()
     if request.method == "POST":
         form = AddImage(request.POST, request.FILES)
         if form.is_valid():
@@ -35,11 +36,8 @@ def addNewImageView(request):
                 return redirect('gallary:dasboard-gallery')
             except IntegrityError:
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
-            except DatabaseError:
-                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
-        form = AddImage()
-    return render(request, 'gallery/dashboard/add-image.html', { 'form' : form })
+        return render(request, 'gallery/dashboard/add-image.html', { 'form' : form })
 
 # edit image
 @login_required(login_url='/admin/')
