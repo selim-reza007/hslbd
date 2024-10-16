@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import CreateCategory
-from django.db import IntegrityError
+from django.db import IntegrityError, DatabaseError
 from products.models import Category
 from django.contrib import messages
 
@@ -41,3 +41,13 @@ def editCategoryView(request, slug):
     else:
         form = CreateCategory(instance=datum)
     return render(request, 'dashboard/add-category.html', { 'form' : form })
+
+#delete category
+def deleteCategoryView(request, slug):
+    datum = get_object_or_404(Category, slug=slug)
+    if request.method == "POST":
+        try:
+            datum.delete()
+            return redirect('category:all-categories')
+        except DatabaseError:
+            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
