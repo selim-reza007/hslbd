@@ -12,8 +12,9 @@
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> {% if request.path == "/category/dashboard/add-category" %}Save{% else %}Update{% endif %}
+            <button class="btn btn-primary mt-0"><i class="fa-solid fa-floppy-disk"></i> {% if request.path == "/category/dashboard/add-category" %}Save{% else %}Update{% endif %}
             </button>
+            <a class="btn btn-warning" href="{% url 'category:all-categories' %}"><i class="fa-solid fa-ban"></i> Cancel</a>
         </form>
     </div>
 </div>

@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import CreateCategory
-from django.db import IntegrityError, DatabaseError
+from django.db import IntegrityError
 from products.models import Category
+from django.contrib import messages
+
 # Create your views here.
 
 #listing out all created categories
@@ -16,11 +18,26 @@ def addCategoryView(request):
         if form.is_valid():
             try:
                 form.save()
-                return HttpResponse("New product category added")
+                messages.success(request, "New Category added successfully")
+                return redirect('category:all-categories')
             except ImportError:
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
-            except DatabaseError:
-                return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
         form = CreateCategory()
+    return render(request, 'dashboard/add-category.html', { 'form' : form })
+
+
+#edit category
+def editCategoryView(request, slug):
+    datum = get_object_or_404(Category, slug=slug)
+    if request.method == "POST":
+        form = CreateCategory(request.POST, instance=datum)
+        if form.is_valid:
+            try:
+                form.save()
+                return redirect('category:all-categories')
+            except ImportError:
+                return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
+    else:
+        form = CreateCategory(instance=datum)
     return render(request, 'dashboard/add-category.html', { 'form' : form })

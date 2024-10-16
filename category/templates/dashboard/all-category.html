@@ -7,6 +7,16 @@ All Categories list
 {% block content %}
 <div class="">
     <p class="h2 bg-success text-white text-center py-2 rounded mb-3">List of all Categories</p>
+    <a href="{% url 'category:add-category' %}" class="btn btn-info">Add new Category</a>
+    {% if messages %}
+        <ul class="alert mx-3 alert-success list-unstyled alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </ul>
+    {% endif %}
+
     {% if categories %}
     <div class="table-responsive mt-4">
         <table class="table table-striped">
@@ -27,7 +37,7 @@ All Categories list
                 <td>{{ category.slug }}</td>
                 <td>{{ category.typeTitle }}</td>
                 <td>
-                    <a class="btn btn-warning" href=""><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                    <a class="btn btn-warning" href="{% url 'category:edit-category' slug=category.slug %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                     <form class="d-inline-block" action="" method="post">
                         {% csrf_token %}
                         <button onclick="return deleteFun('Brand')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
