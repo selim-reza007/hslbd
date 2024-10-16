@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Message(models.Model):
-    firstName = models.CharField(max_length=15, blank=True)
-    lastName = models.CharField(max_length=15, blank=True)
+    firstName = models.CharField(max_length=50, blank=True)
+    lastName = models.CharField(max_length=50, blank=True)
     companyName = models.CharField(max_length=50, blank=True)
     mobile = models.CharField(max_length=20)
     email = models.EmailField(max_length=200)

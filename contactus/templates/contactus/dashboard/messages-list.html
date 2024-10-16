@@ -16,44 +16,43 @@ Requested Messages
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </ul>
     {% endif %}
+    {% if messagesData %}
+    <div class="table-responsive mt-4">
     
-  <!-- Example Data Table -->
-  <div class="table-responsive mt-4">
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Sender</th>
-          <th>Email address</th>
-          <th>Received Date</th>
-          <th>Status</th>
-          <th>Action Taken</th>
-          <th>Open Message</th>
-        </tr>
-      </thead>
-      <tbody>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Email address</th>
+            <th>Received Date</th>
+            <th>Status</th>
+            <th>Action Taken</th>
+            <th>Open Message</th>
+          </tr>
+        </thead>
+        <tbody>
 
         {% for item in messagesData %}
-        <tr class="{% if item.messageRead == False %} bg-light {% endif %}">
-          <td>{% if item.firstName %}{{ item.firstName }} {% else %}Not provided{% endif %} {{ item.lastName }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.receivedDate }}</td>
-          <td>
-            {% if item.messageRead == False %}
-              <span class="badge bg-warning">Not Viewed</span>
-            {% else %}
-              <span class="text-dark">Viewed</span>
-            {% endif %}
-          </td>
-          <td>
-            {% if item.status == True %}
-              <span class="fw-normal text-success">Replied</span>
-            {% else %}
-            <span class="badge bg-danger">Not Replied</span>
-            {% endif %}
-          </td>
-          <td class="">
-            <a class="btn btn-sm btn-success" title="Click to open message" href="{% url 'contactus:details-msg' id=item.id %}"><i class="fa-solid fa-unlock"></i> Open</a>
+          <tr class="{% if item.messageRead == False %} bg-light {% endif %}">
+            <td>{% if item.firstName %}{{ item.firstName }} {% else %}Not provided{% endif %} {{ item.lastName }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.receivedDate }}</td>
+            <td>
+              {% if item.messageRead == False %}
+                <span class="badge bg-warning">Not Viewed</span>
+              {% else %}
+                <span class="text-dark">Viewed</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if item.status == True %}
+                <span class="fw-normal text-success">Replied</span>
+              {% else %}
+              <span class="badge bg-danger">Not Replied</span>
+              {% endif %}
+            </td>
+            <td class="">
+              <a class="btn btn-sm btn-success" title="Click to open message" href="{% url 'contactus:details-msg' id=item.id %}"><i class="fa-solid fa-unlock"></i> Open</a>
           </td>
         </tr>
         {% endfor %}
@@ -61,8 +60,7 @@ Requested Messages
       </tbody>
     </table>
   </div>
-  <!-- Example Data Table end -->
-  
+
   <div class="container row justify-content-center mt-1 pb-3">
     <div class="pagination w-auto">
       <span class="step-links">
@@ -82,6 +80,8 @@ Requested Messages
       </span>
      </div>
   </div>
-
+  {% else %}
+  <p class="h2">You haven't received any message yet!</p>
+  {% endif %}
 </div>
 {% endblock content %}
