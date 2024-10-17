@@ -2,7 +2,7 @@
 
 
 {% if request.path == "/products/dashboard/list/" %}
-<a class="col-md-4 text-dark outer-type-container" href="{% url 'products:products-by-type' %}">
+<a class="col-md-4 text-dark outer-type-container" href="{% url 'products:products-by-type' typeId=type.id %}">
 {% else %}
 <a class="col-md-4 text-dark outer-type-container"  href="{% url 'products:add-product' typeId=type.id %}">
 {% endif %}

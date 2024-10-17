@@ -5,7 +5,37 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="pb-3">
-        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Products by Type</p>
+    <div class="pb-3 category-container">
+        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">All {{ title }}</p>
+
+        <a href="{% url 'products:list-product' %}" class="btn btn-warning mb-3"><i class="fa-solid fa-caret-left"></i> Go Back</a>
+        <a href="{% url 'products:load-types' %}" class="btn btn-info mb-3">Add new Product</a>
+
+        <div class="border pb-3">
+            <p class="bg-light text-center fw-bold py-2">Select Category to get products by category</p>
+            <div class="ms-2 category-items-container">
+                {% if items %}
+                    {% for item in items %}
+                        <a href="#" class="d-inline-block px-3 py-2 m-1 category-item">
+                            {{ item.categoryName }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <p class="h2 text-danger">No category created!</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="products-by-type-container">
+            <div class="mt-0 row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
+                {% if products %}
+                    {% for data in products %}
+                        {% include "components/_single_product.html" with product=data %}
+                    {% endfor %}
+                {% else %}
+                    <p class="display-2 text-danger">No product created!</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock content %}

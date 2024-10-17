@@ -123,5 +123,9 @@ def loadAllTypesView(request):
     return render(request, 'products/dashboard/select-type.html', { 'types' : types, 'evens' : evenNumbers })
 
 #display Products by Type
-def loadsProductsBtTypeView(request):
-    return render(request, 'products/dashboard/products-by-type.html')
+def loadsProductsBtTypeView(request, typeId):
+    categories = Category.objects.filter(typeTitle=typeId)
+    products = Products.objects.filter(categoryTitle__typeTitle=typeId) #join query
+    title = Type.objects.get(id=typeId)
+    print(title)
+    return render(request, 'products/dashboard/products-by-type.html', { 'items' : categories, 'products' : products, 'title' : title })

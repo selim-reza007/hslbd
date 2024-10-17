@@ -9,6 +9,8 @@
     <div class="">
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Select product type</p>
 
+        <a href="{% url 'products:list-product' %}" class="btn btn-warning mb-3"><i class="fa-solid fa-caret-left"></i> Go Back</a>
+        
         <div class="row g-3">
 
             {% for data in types %}
@@ -18,6 +20,5 @@
             {% endfor %}
             
         </div>
-        {% include "components/_go_back.html" %}
     </div>
 {% endblock content %}
