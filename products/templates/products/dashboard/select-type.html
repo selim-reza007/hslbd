@@ -13,7 +13,7 @@
 
             {% for type in types %}
             
-            <a class="col-md-4 text-dark outer-type-container" href="">
+            <a class="col-md-4 text-dark outer-type-container" href="{% url 'products:add-product' typeId=type.id %}">
                 <div class="type-container rounded-3 d-flex justify-content-center align-items-center {% if forloop.counter in evens %}bg-color-blueSkies{% else %}bg-color-telegram{% endif %}">
                     <p class="fw-bold">{{ type }}</p>
                 </div>

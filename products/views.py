@@ -59,7 +59,7 @@ def productDashboardView(request):
 
 #Creating new product in Dashboard
 @login_required(login_url='/admin/')
-def addNewProductView(request):
+def addNewProductView(request, typeId):
     if request.method == "POST":
         form = CreateProduct(request.POST, request.FILES)
         if form.is_valid():
@@ -70,13 +70,8 @@ def addNewProductView(request):
             except IntegrityError:
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
     else:
-        form = CreateProduct()
-        try:
-            data = Category.objects.filter(typeTitle=3)
-            print( "Categories are : " ,data)
-            return render(request, 'products/dashboard/add-product.html', { 'form' : form})
-        except DatabaseError:
-            return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
+        form = CreateProduct(typeTitle=typeId)
+    return render(request, 'products/dashboard/add-product.html', { 'form' : form})
 
 #edting exissting product
 @login_required(login_url='/admin/')

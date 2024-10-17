@@ -8,7 +8,7 @@
 {% block content %}
     <div class="">
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">
-            {% if request.path == '/products/dashboard/add/' %}
+            {% if '/products/dashboard/add/' in request.path %}
             Add new Product
             {% else %}
             Edit Product
@@ -21,7 +21,7 @@
                 {{ form|crispy }}
                 <div class="col">
                     <button class="btn btn-primary mt-0"><i class="fa-solid fa-floppy-disk"></i> 
-                        {% if request.path == '/products/dashboard/add/' %}
+                        {% if '/products/dashboard/add/' in request.path %}
                             Save
                         {% else %}
                             Update
