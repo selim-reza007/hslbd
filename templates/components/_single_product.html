@@ -11,8 +11,18 @@
             <img src="{{ product.productImage.url }}" class="card-img-top mb-3 img-fluid" alt="Product image">
             <div class="card-body border-top card-hover">
                 <h5 class="card-title">{{ product.productName }}</h5>
-                <p class="card-text lead mb-0">Brand: {{ product.barndName.brandName }}</p>
-                <p class="card-text lead mt-0">Country: {{ product.barndName.country }}</p>
+                <p class="card-text lead mb-0">
+                    {% if product.barndName.brandName %}
+                        Brand: {{ product.barndName.brandName }}
+                    {% else %}
+                    {% endif %}
+                </p>
+                <p class="card-text lead mt-0">
+                    {% if product.barndName.country %}
+                        Country: {{ product.barndName.country }}
+                    {% else %}
+                    {% endif %}
+                </p>
             </div>
         </a>
     </div>

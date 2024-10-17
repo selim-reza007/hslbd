@@ -61,7 +61,7 @@ def productDashboardView(request):
 @login_required(login_url='/admin/')
 def addNewProductView(request, typeId):
     if request.method == "POST":
-        form = CreateProduct(request.POST, request.FILES)
+        form = CreateProduct(request.POST, request.FILES, typeTitle=typeId)
         if form.is_valid():
             try:
                 form.save()
