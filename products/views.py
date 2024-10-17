@@ -49,9 +49,11 @@ def productDetailDashboardView(request, id):
 #Viewing products list from dashboard
 @login_required(login_url='/admin/')
 def productDashboardView(request):
+    evenNumbers = [1,3,5,7,9,11,13,15]
     try:
         data = Products.objects.all().order_by('-id')
-        return render(request, 'products/dashboard/list-porduct.html', { 'products' : data })
+        types = Type.objects.all()
+        return render(request, 'products/dashboard/list-porduct.html', { 'products' : data, 'types' : types, 'evens' : evenNumbers })
     except ObjectDoesNotExist:
         return render(request, 'Error.html', { 'errorMsg' : 'Item not found!' })
     except DatabaseError:
@@ -113,9 +115,13 @@ def deleteProductView(request, id):
         
 
 #added after 16th october 2024
+
+#loads types to dashboard's for creaing product
 def loadAllTypesView(request):
     types = Type.objects.all()
     evenNumbers = [1,3,5,7,9,11,13,15]
     return render(request, 'products/dashboard/select-type.html', { 'types' : types, 'evens' : evenNumbers })
 
-# def createNewProductView(request):
+#display Products by Type
+def loadsProductsBtTypeView(request):
+    return render(request, 'products/dashboard/products-by-type.html')

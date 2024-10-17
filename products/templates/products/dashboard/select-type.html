@@ -11,17 +11,13 @@
 
         <div class="row g-3">
 
-            {% for type in types %}
+            {% for data in types %}
             
-            <a class="col-md-4 text-dark outer-type-container" href="{% url 'products:add-product' typeId=type.id %}">
-                <div class="type-container rounded-3 d-flex justify-content-center align-items-center {% if forloop.counter in evens %}bg-color-blueSkies{% else %}bg-color-telegram{% endif %}">
-                    <p class="fw-bold">{{ type }}</p>
-                </div>
-            </a>
+                {% include "my_admin/components/_type.html" with type=data %}
             
             {% endfor %}
             
         </div>
-
+        {% include "components/_go_back.html" %}
     </div>
 {% endblock content %}

@@ -1,0 +1,12 @@
+
+
+
+{% if request.path == "/products/dashboard/list/" %}
+<a class="col-md-4 text-dark outer-type-container" href="{% url 'products:products-by-type' %}">
+{% else %}
+<a class="col-md-4 text-dark outer-type-container"  href="{% url 'products:add-product' typeId=type.id %}">
+{% endif %}
+    <div class="type-container rounded-3 d-flex justify-content-center align-items-center {% if forloop.counter in evens %}bg-color-blueSkies{% else %}bg-color-telegram{% endif %}">
+        <p class="fw-bold">{{ type }}</p>
+    </div>
+</a>
