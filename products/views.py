@@ -77,8 +77,10 @@ def addNewProductView(request, typeId):
 @login_required(login_url='/admin/')
 def editProductView(request, id):
     obj = get_object_or_404(Products, id=id)
+    categoryObj = Category.objects.get(id=obj.categoryTitle.id)
+    typeId = categoryObj.typeTitle.id
     if request.method == "POST":
-        form = CreateProduct(request.POST, request.FILES, instance=obj)
+        form = CreateProduct(request.POST, request.FILES, typeTitle=typeId, instance=obj)
         if form.is_valid():
             try:
                 form.save()
@@ -89,7 +91,7 @@ def editProductView(request, id):
             except DatabaseError:
                 return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
     else:
-        form = CreateProduct(instance=obj)
+        form = CreateProduct(typeTitle=typeId, instance=obj)
     return render(request, 'products/dashboard/add-product.html', { 'form' : form })
     
 #delete product
