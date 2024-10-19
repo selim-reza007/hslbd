@@ -10,10 +10,12 @@ from .models import Type, Category
 
 # Create your views here.
 # Display all products list to normal view
-def productsListView(request):
+def productsListView(request, slug):
     try:
-        data = Products.objects.all().order_by('-id')
-        return render(request, 'products/list.html', { 'products' : data, 'title' : 'List of All Products' })
+        typeId = Type.objects.get(slug=slug)
+        categories = Category.objects.filter(typeTitle=typeId.id)
+        data = Products.objects.filter(categoryTitle__typeTitle=typeId.id).order_by('-id')
+        return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {typeId}', 'categories' : categories, 'type' : typeId })
     except DatabaseError:
         return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
@@ -25,8 +27,6 @@ def productsListByBrandView(request, id):
         return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products' })
     except DatabaseError:
         return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
-    except ObjectDoesNotExist:
-        return render(request, 'Error.html', { 'errorMsg' : 'Objects not found!' })
 
 #detailed product view in normal view
 def productDetailView(request, id):

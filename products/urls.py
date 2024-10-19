@@ -4,7 +4,7 @@ from . import views
 app_name = 'products'
 
 urlpatterns = [
-    path('all/', views.productsListView, name="all-products"),#display all products in normal view
+    path('all/<slug:slug>', views.productsListView, name="all-products"),#display all products in normal view
     path('dashboard/list/', views.productDashboardView, name='list-product'), #Listing all Products in Dashboard
     path('dashboard/by-type/<int:typeId>', views.loadsProductsBtTypeView, name="products-by-type"), #listing all product based on Type
     path('dashboard/by-category/<int:categoryId>', views.loadsProductsBtCategoryView, name='products-by-category'), #listing all product based on Category

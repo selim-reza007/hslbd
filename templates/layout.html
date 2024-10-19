@@ -32,7 +32,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       {% if typeItems %}
                         {% for type in typeItems %}
-                          <li><a class="dropdown-item border-bottom" href="#">{{ type.typeName }}</a></li>
+                          <li><a class="dropdown-item border-bottom" href="{% url 'products:all-products' slug=type.slug %}">{{ type.typeName }}</a></li>
                         {% endfor %}  
                       {% else %}
                       <li><a class="dropdown-item border-bottom" href="#">Default Type</a></li>
@@ -94,8 +94,8 @@
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a class="footer-link" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="footer-link" href="{% url 'gallary:gallary' %}">Gallery</a></li>
                         <li><a class="footer-link" href="{% url 'aboutus:aboutus' %}">About</a></li>
-                        <li><a class="footer-link" href="{% url 'products:all-products' %}">Products</a></li>
                         <li><a class="footer-link" href="{% url 'contactus:contactus' %}">Contact</a></li>
                     </ul>
                 </div>
