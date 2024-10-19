@@ -8,10 +8,10 @@
     <div class="pb-3 category-container">
         <p class="h2 bg-success text-white text-center py-2 rounded mb-3">All Products (Category)</p>
 
-        <a href="{% url 'products:list-product' %}" class="btn btn-warning mb-3"><i class="fa-solid fa-caret-left"></i> Go Back</a>
+        <a href={{ request.META.HTTP_REFERER }} class="btn btn-warning mb-3"><i class="fa-solid fa-caret-left"></i> Go Back</a>
         <a href="{% url 'products:load-types' %}" class="btn btn-info mb-3">Add new Product</a>
 
-        {% comment %} <div class="products-by-type-container">
+        <div class="products-by-type-container">
             <div class="mt-0 row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
                 {% if products %}
                     {% for data in products %}
@@ -21,6 +21,6 @@
                     <p class="display-2 text-danger">No product created!</p>
                 {% endif %}
             </div>
-        </div> {% endcomment %}
+        </div>
     </div>
 {% endblock content %}

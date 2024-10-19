@@ -22,9 +22,7 @@
         <ul class="ul-list text-white list-unstyled">
           <li class="my-2"><a class="sidebar-link {% if request.path == "/dashboard/" %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a></li>
           <li class="my-2"><a class="sidebar-link {% if 'brand' in request.path %}active{% endif %}" href="{% url 'brand:brand-list' %}">Brands</a></li>
-
-          <li class="my-2"><a class="sidebar-link {% if 'category' in request.path %}active{% endif %}" href="{% url 'category:all-categories' %}">Category</a></li>
-
+          <li class="my-2"><a class="sidebar-link {% if '/category/' in request.path %}active{% endif %}" href="{% url 'category:all-categories' %}">Category</a></li>
           <li class="my-2"><a class="sidebar-link {% if 'products' in request.path %}active {% endif %}" href="{% url 'products:list-product' %}">Products</a></li>
           <li class="my-2"><a class="sidebar-link{% if 'gallery' in request.path %} active{% endif %}" href="{% url 'gallary:dasboard-gallery' %}">Gallery</a></li>
           <li class="my-2"><a class="sidebar-link {% if 'messages' in request.path %}active{% endif %}" href="{% url 'contactus:requested-msg' %}">Messages</a></li>

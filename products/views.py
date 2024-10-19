@@ -132,4 +132,5 @@ def loadsProductsBtTypeView(request, typeId):
 
 #display Products by Category in dashboard
 def loadsProductsBtCategoryView(request, categoryId):
-    return render(request, 'products/dashboard/products-by-category.html')
+    data = Products.objects.filter(categoryTitle=categoryId)
+    return render(request, 'products/dashboard/products-by-category.html', { 'products' : data})

@@ -16,7 +16,7 @@
             <div class="ms-2 category-items-container">
                 {% if items %}
                     {% for item in items %}
-                        <a href="#" class="d-inline-block px-3 py-2 m-1 category-item">
+                        <a href="{% url 'products:products-by-category' categoryId=item.id %}" class="d-inline-block px-3 py-2 m-1 category-item">
                             {{ item.categoryName }}
                         </a>
                     {% endfor %}
