@@ -68,6 +68,11 @@ a {
     scale: 1.05;
 }
 
+.brand-card-body {
+    background-color: #00729c;
+    color: #fff;
+}
+
 .product-brand,
 .about-bg,
 .about-us,

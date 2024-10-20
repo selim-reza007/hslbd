@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load brand_tags %}
+{% load custom_filters %}
 
 {% block title %}
 List of all products
@@ -20,7 +21,7 @@ List of all products
               <div class="col brand-card">
                 <div class="card text-center">
                   <a href="{% url 'products:category-products' categoryId=category.id %}">
-                    <div class="card-body">
+                    <div class="card-body {% if request.path|contains:category.id %}brand-card-body{% endif %}">
                       <h5 class="card-title">{{ category.categoryName }}</h5>
                     </div>
                   </a>
