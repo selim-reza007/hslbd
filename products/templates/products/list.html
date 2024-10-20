@@ -19,7 +19,7 @@ List of all products
             {% for category in categories %}
               <div class="col brand-card">
                 <div class="card text-center">
-                  <a href="">
+                  <a href="{% url 'products:category-products' categoryId=category.id %}">
                     <div class="card-body">
                       <h5 class="card-title">{{ category.categoryName }}</h5>
                     </div>

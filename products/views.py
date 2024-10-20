@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Type, Category
 
 # Create your views here.
-# Display all products list to normal view
+# Display all products list based on type to normal view
 def productsListView(request, slug):
     try:
         typeId = Type.objects.get(slug=slug)
@@ -22,9 +22,11 @@ def productsListView(request, slug):
 #display products list by brand in normal view
 def productsListByBrandView(request, id):
     try:
+        typeObj = Type.objects.all()[:1][0]
+        categories = Category.objects.filter(typeTitle=typeObj.id)
         data = Products.objects.filter(barndName=id)
         brandName = Brands.objects.get(id=id).brandName
-        return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products' })
+        return render(request, 'products/list.html', { 'products' : data, 'title' : f'List of {brandName} brand\'s Products', 'type' : typeObj, 'categories' : categories })
     except DatabaseError:
         return render(request, 'Error.html', { 'errorMsg' : 'Database error occured!' })
 
@@ -134,3 +136,11 @@ def loadsProductsBtTypeView(request, typeId):
 def loadsProductsBtCategoryView(request, categoryId):
     data = Products.objects.filter(categoryTitle=categoryId)
     return render(request, 'products/dashboard/products-by-category.html', { 'products' : data})
+
+#loads products bassed on category in normal view
+def loadsProductsByCategoryNormalView(request, categoryId):
+    data = Products.objects.filter(categoryTitle=categoryId)
+    categoryObj = Category.objects.get(id=categoryId)
+    typeId = categoryObj.typeTitle
+    categories = Category.objects.filter(typeTitle=typeId.id)
+    return render(request, 'products/list.html', { 'products' : data, 'categories' : categories, 'type' : typeId, 'title' : f'Products of {categoryObj} category' })
