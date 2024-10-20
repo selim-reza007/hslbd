@@ -1,11 +1,16 @@
 from django.db import models
 from brand.models import Brands
-
+from django.utils.text import slugify
 
 #type class
 class Type(models.Model):
     typeName = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30, default=None, null=True, blank=True)
+    slug = models.SlugField(max_length=30, unique=True, blank=True, default='temp-slug')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.typeName)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.typeName
@@ -13,8 +18,13 @@ class Type(models.Model):
 #category class
 class Category(models.Model):
     categoryName = models.CharField(max_length=100)
-    slug = models.CharField(max_length=30, default=None)
-    typeTitle = models.ForeignKey(Type, on_delete=models.CASCADE, default=None)
+    slug = models.SlugField(max_length=30, unique=True, blank=True, default='temp-slug')
+    typeTitle = models.ForeignKey(Type, on_delete=models.CASCADE, related_name='categories')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.categoryName)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.categoryName
