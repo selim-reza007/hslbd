@@ -33,9 +33,10 @@ def productsListByBrandView(request, id):
 #detailed product view in normal view
 def productDetailView(request, id):
     try:
-        pType = Products.objects.get(categoryTitle__typeTitle=typeId)
-        data = Products.objects.all()[:5] #getting 5 products data
         datum = get_object_or_404(Products, id=id)
+        pType = datum.categoryTitle.typeTitle
+        data = Products.objects.filter(categoryTitle__typeTitle=pType)[:5] #getting 5 products data
+        print("Product's Type : ", pType)
         return render(request, 'products/product-details.html', { 'product' : datum, 'products' : data })
     except ObjectDoesNotExist:
         return render(request, 'Error.html', { 'errorMsg' : 'Object not found!' })
