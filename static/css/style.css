@@ -7,6 +7,18 @@ a {
     background: #f8f9fa;
 }
 
+/* CSS to trigger the dropdown on hover */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Optional: Adjust to remove any jump */
+}
+
+/* Optional: Smooth out the dropdown animation */
+.dropdown-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+
 .hero {
     position: relative;
     background-image: url('../../media/hero-background.jpg');

@@ -33,6 +33,7 @@ def productsListByBrandView(request, id):
 #detailed product view in normal view
 def productDetailView(request, id):
     try:
+        pType = Products.objects.get(categoryTitle__typeTitle=typeId)
         data = Products.objects.all()[:5] #getting 5 products data
         datum = get_object_or_404(Products, id=id)
         return render(request, 'products/product-details.html', { 'product' : datum, 'products' : data })
@@ -119,12 +120,14 @@ def deleteProductView(request, id):
 #added after 16th october 2024
 
 #loads types to dashboard's for creaing product
+@login_required(login_url='/admin/')
 def loadAllTypesView(request):
     types = Type.objects.all()
     evenNumbers = [1,3,5,7,9,11,13,15]
     return render(request, 'products/dashboard/select-type.html', { 'types' : types, 'evens' : evenNumbers })
 
 #display Products by Type in dashboard
+@login_required(login_url='/admin/')
 def loadsProductsBtTypeView(request, typeId):
     categories = Category.objects.filter(typeTitle=typeId)
     products = Products.objects.filter(categoryTitle__typeTitle=typeId) #join query
@@ -133,6 +136,7 @@ def loadsProductsBtTypeView(request, typeId):
     return render(request, 'products/dashboard/products-by-type.html', { 'items' : categories, 'products' : products, 'title' : title })
 
 #display Products by Category in dashboard
+@login_required(login_url='/admin/')
 def loadsProductsBtCategoryView(request, categoryId):
     data = Products.objects.filter(categoryTitle=categoryId)
     return render(request, 'products/dashboard/products-by-category.html', { 'products' : data})
