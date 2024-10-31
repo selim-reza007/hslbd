@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/admin/')
 def allCategoriesView(request):
     data = Category.objects.all()
-    return render(request, 'dashboard/all-category.html', { 'categories' : data })
+    return render(request, 'category/dashboard/all-category.html', { 'categories' : data })
 
 #Creating new category
 @login_required(login_url='/admin/')
@@ -26,7 +26,7 @@ def addCategoryView(request):
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
     else:
         form = CreateCategory()
-    return render(request, 'dashboard/add-category.html', { 'form' : form })
+    return render(request, 'category/dashboard/add-category.html', { 'form' : form })
 
 
 #edit category
@@ -44,7 +44,7 @@ def editCategoryView(request, slug):
                 return render(request, 'Error.html', { 'errorMsg' : 'Integrity error occured!' })
     else:
         form = CreateCategory(instance=datum)
-    return render(request, 'dashboard/add-category.html', { 'form' : form })
+    return render(request, 'category/dashboard/add-category.html', { 'form' : form })
 
 #delete category
 @login_required(login_url='/admin/')
