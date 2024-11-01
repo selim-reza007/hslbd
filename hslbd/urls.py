@@ -23,11 +23,7 @@ urlpatterns = [
 ]
 
 
-
-
-
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 
 def custom_404_view(request, exception=None):
     return render(request, 'Not-found.html', status=404)
