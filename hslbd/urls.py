@@ -1,12 +1,15 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import handler404
 from django.shortcuts import render
+from django.views.static import serve
 
 urlpatterns = [
+    re_path(r'^media/(?P<path>.*)$', serve, { 'document_root' : settings.MEDIA_ROOT }),
+    re_path(r'^static/(?P<path>.*)$', serve, { 'document_root' : settings.STATIC_ROOT }),
     path('super/admin/user/', admin.site.urls),
     path('', views.homeView, name='home'),  # Loads home page
     path('dashboard/', views.dashboardView, name='dashboard'),
@@ -19,7 +22,12 @@ urlpatterns = [
     path('category/', include('category.urls')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 def custom_404_view(request, exception=None):
     return render(request, 'Not-found.html', status=404)
