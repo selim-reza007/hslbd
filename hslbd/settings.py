@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-u!enuw-7m6b-o1-#ocul&(1xpqyrdei4cel+x(8$b+pyhj^g_!
 DEBUG = False
 
 # ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['hslbd.onrender.com','localhost']
 
 #Will logout user when the browser is clossed also two middle ware are also resopnsible
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
