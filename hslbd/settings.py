@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import dj_database_url
-import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +25,6 @@ SECRET_KEY = 'django-insecure-u!enuw-7m6b-o1-#ocul&(1xpqyrdei4cel+x(8$b+pyhj^g_!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ["*"]
 ALLOWED_HOSTS = ['hslbd.onrender.com','localhost']
 
 #Will logout user when the browser is clossed also two middle ware are also resopnsible
@@ -92,30 +89,11 @@ WSGI_APPLICATION = 'hslbd.wsgi.application'
 
 
 #sqlite db connection
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-#PostgreSQL connection locally
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hslbd_db',  # Your PostgreSQL database name
-#         'USER': 'postgres',   # PostgreSQL username (default is 'postgres')
-#         'PASSWORD': 'pg123',  # PostgreSQL password you set
-#         'HOST': 'localhost',  # Set to 'localhost' if the database is on your local machine
-#         'PORT': '5432',       # Default PostgreSQL port is 5432
-#     }
-# }
-
-#postgresql connection globally
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')  # Looks for DATABASE_URL in environment variables
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
